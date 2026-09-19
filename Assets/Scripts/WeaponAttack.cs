@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponAttack : MonoBehaviour
 {
     private Animator animator;
-    private Vector2 knockback;
 
     private float knockbackForce = 2f;
 
