@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         // reset score
         currentScore = 0;
         UpdateScoreUI();
+
         MainGameScreen.SetActive(true);
         GameOverScreen.SetActive(false);
     }

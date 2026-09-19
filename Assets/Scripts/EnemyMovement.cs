@@ -5,10 +5,11 @@ using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
-
+    public Animator animator;
     private float originalX;
     private float moveSpeed = 0.5f;
     public int enemyHealth = 3;
+    public bool isInvulnerable = false;
     private Rigidbody2D enemyBody;
     public Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f); 
 
@@ -19,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         enemyBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -29,7 +31,8 @@ public class EnemyMovement : MonoBehaviour
 
     public void ApplyKnockback(Vector2 direction, float strength)
     {
-        knockbackTimer = 0.7f;
+        isInvulnerable = true;
+        knockbackTimer = 1f;
         enemyBody.linearVelocity = Vector2.zero;
         enemyBody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
@@ -43,6 +46,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 originalX = transform.position.x;
                 enemyBody.linearVelocity = Vector2.zero;
+                isInvulnerable = false;
             }
             
         }

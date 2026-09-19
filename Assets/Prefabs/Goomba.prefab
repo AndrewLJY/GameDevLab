@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4264051754771388781}
   - component: {fileID: 2010917628076066333}
   - component: {fileID: 8275426448128023365}
+  - component: {fileID: 8906752515818806490}
   m_Layer: 8
   m_Name: Goomba
   m_TagString: Enemy
@@ -179,6 +180,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc97e68fb3632f4697475d3a58ef933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  player: {fileID: 0}
+  enemyHealth: 3
+  isInvulnerable: 0
   startPosition: {x: 0, y: 0, z: 0}
   gameManager: {fileID: 0}
+--- !u!95 &8906752515818806490
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219531938323027805}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 544f7255c587ce94cbddb27bd4e0f271, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
