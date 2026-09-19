@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float upSpeed = 10;
     private bool onGroundState = true;
     public GameManager gameManager;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         // Set to be 30 FPS
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("d") && !faceRightState)
         {
             faceRightState = true;
+            
             Flip();
         }
     }
@@ -59,7 +62,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        if (Mathf.Abs(moveHorizontal) > 0)
+        bool isWalking = Mathf.Abs(moveHorizontal) > 0.3f;
+        animator.SetBool("isWalking", isWalking);
+
+        if (isWalking)
         {
             Vector2 movement = new Vector2(moveHorizontal, 0);
             // check if it doesn't go beyond maxSpeed
