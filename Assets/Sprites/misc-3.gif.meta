@@ -131,7 +131,7 @@ TextureImporter:
         width: 1
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -9055,15 +9055,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_445
+      name: hammer_up
       rect:
         serializedVersion: 2
         x: 513
         y: 255
         width: 8
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.56318665, y: 0.029673576}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -9215,6 +9215,7 @@ TextureImporter:
       goomba_left: -348658204
       goomba_right: -1166754851
       ground_brown: -1692987874
+      hammer_up: -1068523615
       magic_mushroom: -666289827
       misc-3_0: -981242194
       misc-3_1: -1141243883
@@ -9590,7 +9591,6 @@ TextureImporter:
       misc-3_442: -501100795
       misc-3_443: -1529579300
       misc-3_444: 1357321755
-      misc-3_445: -1068523615
       misc-3_446: -400097193
       misc-3_447: 135011769
       misc-3_448: -1311203372

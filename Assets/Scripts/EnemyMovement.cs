@@ -1,69 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
 
     private float originalX;
-    private float maxOffset = 1.0f;
-    private float enemyPatroltime = 2.0f;
-    private int moveRight = -1;
-    private Vector2 velocity;
-
+    private float moveSpeed = 0.5f;
+    public int enemyHealth = 3;
     private Rigidbody2D enemyBody;
+    public Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f); 
 
-    public Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    private float knockbackTimer = 0f;
+    public GameManager gameManager;
+    private Transform playerTransform;
 
     void Start()
     {
         enemyBody = GetComponent<Rigidbody2D>();
-        // get the starting position
-        originalX = transform.position.x;
-        ComputeVelocity();
-    }
-    void ComputeVelocity()
-    {
-        velocity = new Vector2((moveRight) * maxOffset / enemyPatroltime, 0);
-    }
-    void Movegoomba()
-    {
-        enemyBody.MovePosition(enemyBody.position + velocity * Time.fixedDeltaTime);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
     }
 
-    // note that this is Update(), which still works but not ideal. See below.
-    //void Update()
-    //{
-    //    if (Mathf.Abs(enemyBody.position.x - originalX) < maxOffset)
-    //    {// move goomba
-    //        Movegoomba();
-    //    }
-    //    else
-    //    {
-    //        // change direction
-    //        moveRight *= -1;
-    //        ComputeVelocity();
-    //        Movegoomba();
-    //    }
-    //}
+    public void ApplyKnockback(Vector2 direction, float strength)
+    {
+        knockbackTimer = 0.7f;
+        enemyBody.linearVelocity = Vector2.zero;
+        enemyBody.AddForce(direction * strength, ForceMode2D.Impulse);
+    }
 
     void FixedUpdate()
     {
-        if (Mathf.Abs(enemyBody.position.x - originalX) < maxOffset)
-        {// move goomba
-            Movegoomba();
-        }
-        else
+        if (knockbackTimer > 0)
         {
-            // change direction
-            moveRight *= -1;
-            ComputeVelocity();
-            Movegoomba();
+            knockbackTimer -= Time.fixedDeltaTime;
+            if (knockbackTimer <= 0)
+            {
+                originalX = transform.position.x;
+                enemyBody.linearVelocity = Vector2.zero;
+            }
+            
         }
+        else if(playerTransform != null)
+        {
+            // Calculate horizontal direction to the player (-1 for Left, 1 for Right)
+            float directionToPlayer = Mathf.Sign(playerTransform.position.x - transform.position.x);
+
+            enemyBody.linearVelocity = new Vector2(directionToPlayer * moveSpeed, enemyBody.linearVelocity.y);
+
+            // Flip the Goomba to face the player
+            if (directionToPlayer > 0)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            else
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Collided with goomba!");
+            Time.timeScale = 0.0f;
+            gameManager.MainGameScreen.SetActive(false);
+            gameManager.GameOverScreen.SetActive(true);
+        }
     }
 }

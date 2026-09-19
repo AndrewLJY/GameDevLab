@@ -47,9 +47,11 @@ public class GameManager : MonoBehaviour
     {
         // reset position
         mario.GetComponent<Transform>().position = new Vector3(-0.947f, -0.292f, 0.0f);
+        mario.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+
         // reset sprite direction
         playerMovement.faceRightState = true;
-        mario.GetComponent<SpriteRenderer>().flipX = false;
+
         // reset Goomba
         foreach (Transform eachChild in enemies.transform)
         {

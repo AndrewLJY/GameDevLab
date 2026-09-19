@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D marioBody;
     public float upSpeed = 10;
     private bool onGroundState = true;
-    public TextMeshProUGUI scoreText;
-    public GameObject enemies;
     public GameManager gameManager;
 
     // Start is called before the first frame update
@@ -33,14 +31,23 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("a") && faceRightState)
         {
             faceRightState = false;
-            marioSprite.flipX = true;
+            Flip();
         }
 
         if (Input.GetKeyDown("d") && !faceRightState)
         {
             faceRightState = true;
-            marioSprite.flipX = false;
+            Flip();
         }
+    }
+
+    void Flip()
+    {
+
+        // Multiply the player's x local scale by -1
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -76,13 +83,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Collided with goomba!");
-            Time.timeScale = 0.0f;
-            gameManager.MainGameScreen.SetActive(false);
-            gameManager.GameOverScreen.SetActive(true);
-        }
     }
 
     
