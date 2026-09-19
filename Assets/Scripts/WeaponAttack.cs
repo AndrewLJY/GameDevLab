@@ -6,7 +6,6 @@ public class WeaponAttack : MonoBehaviour
 
     private float knockbackForce = 2f;
 
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,6 +46,7 @@ public class WeaponAttack : MonoBehaviour
                 if (enemy.enemyHealth < 1)
                 {
                     Destroy(other.gameObject);
+                    GameManager.Instance.AddScore(1);
                 }
             }
             else

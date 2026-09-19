@@ -45,7 +45,7 @@ public class JumpOverGoomba : MonoBehaviour
             if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
             {
                 countScoreState = false;
-                GameManager.Instance.AddScore(1);
+                //GameManager.Instance.AddScore(1);
                 //scoreText.text = "Score: " + score.ToString();
                 Debug.Log(score);
             }

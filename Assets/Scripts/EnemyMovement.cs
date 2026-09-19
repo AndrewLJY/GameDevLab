@@ -11,11 +11,16 @@ public class EnemyMovement : MonoBehaviour
     public int enemyHealth = 3;
     public bool isInvulnerable = false;
     private Rigidbody2D enemyBody;
-    public Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f); 
+    public Vector3 startPosition; 
 
     private float knockbackTimer = 0f;
-    public GameManager gameManager;
     private Transform playerTransform;
+
+    void Awake()
+    {
+        startPosition = transform.localPosition;
+        Debug.Log("startPosition: " + startPosition);
+    }
 
     void Start()
     {
@@ -72,8 +77,8 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.Log("Collided with goomba!");
             Time.timeScale = 0.0f;
-            gameManager.MainGameScreen.SetActive(false);
-            gameManager.GameOverScreen.SetActive(true);
+            GameManager.Instance.MainGameScreen.SetActive(false);
+            GameManager.Instance.GameOverScreen.SetActive(true);
         }
     }
 }

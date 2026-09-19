@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         foreach (Transform eachChild in enemies.transform)
         {
             eachChild.transform.localPosition = eachChild.GetComponent<EnemyMovement>().startPosition;
+            eachChild.GetComponent<EnemyMovement>().enemyHealth = 3;
         }
         // reset score
         currentScore = 0;
