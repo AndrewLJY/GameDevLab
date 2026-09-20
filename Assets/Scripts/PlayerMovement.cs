@@ -9,10 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public bool faceRightState = true;
     public float speed = 10;
     public float maxSpeed = 20;
+    public int playerHealth = 3;
+    //private float knockbackTimer = 0f;
+    public bool isInvulnerable = false;
     private Rigidbody2D marioBody;
     public float upSpeed = 10;
     private bool onGroundState = true;
     public GameManager gameManager;
+    public GameObject playerHearts;
     public Animator animator;
 
     // Start is called before the first frame update
@@ -87,9 +91,38 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void ApplyKnockback(Vector2 direction)
     {
+        isInvulnerable = true;
+        //knockbackTimer = 1f;
+        marioBody.linearVelocity = Vector2.zero;
+        marioBody.AddForce(direction * 4f, ForceMode2D.Impulse);
     }
 
-    
+    public void TakeDamage(Collider2D other)
+    {
+        if (!isInvulnerable)
+        {
+            Debug.Log("Collided with goomba!");
+            isInvulnerable = true;
+
+            animator.SetTrigger("TakingDmg");
+            Vector2 heading = transform.position - other.transform.position;
+            Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
+            ApplyKnockback(knockbackDirection);
+
+            playerHealth -= 1;
+
+            playerHearts.transform.GetChild(playerHealth).GetComponent<HealthManager>().PlayerTakingDmg();
+
+            if (playerHealth <= 0)
+            {
+                Time.timeScale = 0.0f;
+                GameManager.Instance.MainGameScreen.SetActive(false);
+                GameManager.Instance.GameOverScreen.SetActive(true);
+            }
+        }
+
+        isInvulnerable = false;
+    }
 }

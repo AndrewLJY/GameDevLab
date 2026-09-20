@@ -42,6 +42,31 @@ public class EnemyMovement : MonoBehaviour
         enemyBody.AddForce(direction * strength, ForceMode2D.Impulse);
     }
 
+    public void TakeDamage(Collider2D other, float knockbackForce)
+    {
+        if (!isInvulnerable)
+        {
+            animator.SetTrigger("onHit");
+            Vector2 heading = transform.position - other.transform.position;
+            Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
+
+            ApplyKnockback(knockbackDirection, knockbackForce);
+
+            enemyHealth -= 1;
+            Debug.Log("enemy.enemyHealth" + enemyHealth);
+
+            if (enemyHealth < 1)
+            {
+                Destroy(gameObject);
+                GameManager.Instance.AddScore(1);
+            }
+        }
+        else
+        {
+            Debug.Log("ITS INVULNERABLEEEE");
+        }
+    }
+
     void FixedUpdate()
     {
         if (knockbackTimer > 0)
@@ -75,10 +100,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collided with goomba!");
-            Time.timeScale = 0.0f;
-            GameManager.Instance.MainGameScreen.SetActive(false);
-            GameManager.Instance.GameOverScreen.SetActive(true);
+            other.GetComponent<PlayerMovement>().TakeDamage(gameObject.GetComponent<Collider2D>());
         }
     }
 }

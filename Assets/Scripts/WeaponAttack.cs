@@ -22,38 +22,13 @@ public class WeaponAttack : MonoBehaviour
     }
 
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
 
             Debug.Log("We sliced the enemy!");
-            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-
-
-            if (!enemy.isInvulnerable)
-            {
-                enemy.animator.SetTrigger("onHit");
-                Vector2 heading = other.transform.position - transform.position;
-                Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
-
-                enemy.ApplyKnockback(knockbackDirection, knockbackForce);
-
-                enemy.enemyHealth -= 1;
-                Debug.Log("enemy.enemyHealth" + enemy.enemyHealth);
-
-                if (enemy.enemyHealth < 1)
-                {
-                    Destroy(other.gameObject);
-                    GameManager.Instance.AddScore(1);
-                }
-            }
-            else
-            {
-                Debug.Log("ITS INVULNERABLEEEE");
-            }
-
+            other.GetComponent<EnemyMovement>().TakeDamage(gameObject.GetComponent<Collider2D>(), knockbackForce);
 
         }
 

@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject MainGameScreen;
     public GameObject GameOverScreen;
     public GameObject enemies;
+    public GameObject playerHearts;
 
     void Awake()
     {
@@ -38,9 +40,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Restart!");
         // reset everything
-        ResetGame();
+        //ResetGame();
+
         // resume time
         Time.timeScale = 1.0f;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void ResetGame()
@@ -51,16 +56,23 @@ public class GameManager : MonoBehaviour
 
         // reset sprite direction
         playerMovement.faceRightState = true;
+        playerMovement.playerHealth = 3;
 
         // reset Goomba
-        foreach (Transform eachChild in enemies.transform)
+        foreach (Transform enemy in enemies.transform)
         {
-            eachChild.transform.localPosition = eachChild.GetComponent<EnemyMovement>().startPosition;
-            eachChild.GetComponent<EnemyMovement>().enemyHealth = 3;
+            enemy.transform.localPosition = enemy.GetComponent<EnemyMovement>().startPosition;
+            enemy.GetComponent<EnemyMovement>().enemyHealth = 3;
         }
+
         // reset score
         currentScore = 0;
         UpdateScoreUI();
+
+        foreach (Transform heart in playerHearts.transform)
+        {
+            heart.gameObject.SetActive(true);
+        }
 
         MainGameScreen.SetActive(true);
         GameOverScreen.SetActive(false);
