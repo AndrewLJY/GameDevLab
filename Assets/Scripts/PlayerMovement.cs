@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private SpriteRenderer marioSprite;
     public bool faceRightState = true;
-    public float speed = 10;
-    public float maxSpeed = 20;
+    public float speed = 1;
+    public float maxSpeed = 3;
     public int playerHealth = 3;
     //private float knockbackTimer = 0f;
     public bool isInvulnerable = false;
@@ -65,29 +65,32 @@ public class PlayerMovement : MonoBehaviour
     // FixedUpdate is called 50 times a second
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        bool isWalking = Mathf.Abs(moveHorizontal) > 0.3f;
-        animator.SetBool("isWalking", isWalking);
-
-        if (isWalking)
+        if (!isInvulnerable)
         {
-            Vector2 movement = new Vector2(moveHorizontal, 0);
-            // check if it doesn't go beyond maxSpeed
-            if (marioBody.linearVelocity.magnitude < maxSpeed)
-                marioBody.AddForce(movement * speed);
-        }
+            float moveHorizontal = Input.GetAxisRaw("Horizontal");
+            bool isWalking = Mathf.Abs(moveHorizontal) > 0.3f;
+            animator.SetBool("isWalking", isWalking);
 
-        // stop
-        if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
-        {
+            if (isWalking)
+            {
+                Vector2 movement = new Vector2(moveHorizontal, 0);
+                // check if it doesn't go beyond maxSpeed
+                if (marioBody.linearVelocity.magnitude < maxSpeed)
+                    marioBody.AddForce(movement * speed);
+            }
+
             // stop
-            marioBody.linearVelocity = Vector2.zero;
-        }
+            if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
+            {
+                // stop
+                marioBody.linearVelocity = Vector2.zero;
+            }
 
-        if (Input.GetKeyDown("space") && onGroundState)
-        {
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-            onGroundState = false;
+            if (Input.GetKeyDown("space") && onGroundState)
+            {
+                marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+                onGroundState = false;
+            }
         }
     }
 

@@ -2465,8 +2465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   faceRightState: 1
-  speed: 10
-  maxSpeed: 5
+  speed: 7
+  maxSpeed: 10
   playerHealth: 3
   isInvulnerable: 0
   upSpeed: 5
@@ -4575,9 +4575,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 661430157}
-  - {fileID: 2050860863}
   - {fileID: 1191165951}
+  - {fileID: 2050860863}
+  - {fileID: 661430157}
   m_Father: {fileID: 1473099823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
