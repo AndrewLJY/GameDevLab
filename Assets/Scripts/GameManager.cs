@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverScoreText;
     public GameObject MainGameScreen;
     public GameObject GameOverScreen;
+    public GameObject MainMenuScreen;
+
+    private static bool isGameRestart = false;
+
     public GameObject enemies;
     public GameObject playerHearts;
 
@@ -21,6 +25,20 @@ public class GameManager : MonoBehaviour
         // Ensure there is only ever one manager
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        if (isGameRestart)
+        {
+            MainMenuScreen.SetActive(false);
+
+            Time.timeScale = 1.0f;
+
+            // Reset the variable so future fresh boots work normally
+            isGameRestart = false;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     public void AddScore(int amount)
@@ -36,6 +54,16 @@ public class GameManager : MonoBehaviour
         if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
     }
 
+    public void StartButtonCallback(int input)
+    {
+        Debug.Log("Start!");
+
+        MainMenuScreen.SetActive(false);
+
+        // resume time
+        Time.timeScale = 1.0f;
+    }
+
     public void RestartButtonCallback(int input)
     {
         Debug.Log("Restart!");
@@ -44,6 +72,8 @@ public class GameManager : MonoBehaviour
 
         // resume time
         Time.timeScale = 1.0f;
+
+        isGameRestart = true;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
