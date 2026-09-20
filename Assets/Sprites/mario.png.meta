@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mario_0
+      name: mario_jump
       rect:
         serializedVersion: 2
         x: 29
@@ -2076,7 +2076,6 @@ TextureImporter:
       - key: SpriteEditor.SliceOnImport
         value: True
     nameFileIdTable:
-      mario_0: 1324139026
       mario_1: -317648185
       mario_10: 37006037
       mario_11: -1279793533
@@ -2156,6 +2155,7 @@ TextureImporter:
       mario_85: 1294907323
       mario_86: 2028794347
       mario_87: -1170566109
+      mario_jump: 1324139026
       mario_stand_left: 1579394125
       mario_stand_right: 1743073465
       mario_walk_left_1: 735154345

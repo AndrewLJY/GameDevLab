@@ -6,15 +6,18 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private SpriteRenderer marioSprite;
+    [SerializeField] private Sprite jumpSprite;
+
     public bool faceRightState = true;
     public float speed = 1;
     public float maxSpeed = 3;
     public int playerHealth = 3;
-    //private float knockbackTimer = 0f;
-    public bool isInvulnerable = false;
-    private Rigidbody2D marioBody;
     public float upSpeed = 10;
     private bool onGroundState = true;
+    public bool isInvulnerable = false;
+    //private float knockbackTimer = 0f;
+
+    private Rigidbody2D marioBody;
     public GameManager gameManager;
     public GameObject playerHearts;
     public Animator animator;
@@ -34,17 +37,22 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("a") && faceRightState)
+        if (Input.GetKeyDown(KeyCode.A) && faceRightState)
         {
             faceRightState = false;
             Flip();
         }
 
-        if (Input.GetKeyDown("d") && !faceRightState)
+        if (Input.GetKeyDown(KeyCode.D) && !faceRightState)
         {
             faceRightState = true;
             
             Flip();
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            
         }
     }
 
@@ -59,7 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Ground")) onGroundState = true;
+        if (col.gameObject.CompareTag("Ground")) 
+        {
+            animator.SetBool("isJumping", false);
+            onGroundState = true;
+        }
     }
 
     // FixedUpdate is called 50 times a second
@@ -80,14 +92,15 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // stop
-            if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
             {
                 // stop
                 marioBody.linearVelocity = Vector2.zero;
             }
 
-            if (Input.GetKeyDown("space") && onGroundState)
+            if (Input.GetKeyDown(KeyCode.Space) && onGroundState)
             {
+                animator.SetBool("isJumping", true);
                 marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
                 onGroundState = false;
             }

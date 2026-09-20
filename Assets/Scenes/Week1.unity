@@ -2950,12 +2950,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c31d9f28c543747b66d41c3ae05659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  jumpSprite: {fileID: 1324139026, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   faceRightState: 1
   speed: 7
   maxSpeed: 10
   playerHealth: 3
-  isInvulnerable: 0
   upSpeed: 5
+  isInvulnerable: 0
   gameManager: {fileID: 1998984345}
   playerHearts: {fileID: 2135189887}
   animator: {fileID: 0}
@@ -5243,7 +5244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 25, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2145841807
@@ -5689,7 +5690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7067007833440106520, guid: 6efab3d90b848d64ca05356fc582641b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -836
+      value: -811
       objectReference: {fileID: 0}
     - target: {fileID: 7067007833440106520, guid: 6efab3d90b848d64ca05356fc582641b, type: 3}
       propertyPath: m_AnchoredPosition.y
