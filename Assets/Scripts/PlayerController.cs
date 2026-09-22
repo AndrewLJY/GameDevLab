@@ -46,11 +46,6 @@ public class PlayerController : MonoBehaviour
             
             Flip();
         }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            
-        }
     }
 
     void Flip()
