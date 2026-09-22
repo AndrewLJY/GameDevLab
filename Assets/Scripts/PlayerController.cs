@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealth <= 0)
             {
-                marioAudio.PlayOneShot(marioDeath);
+                MuteAllAndPlayDeath();
                 Time.timeScale = 0.0f;
                 GameManager.Instance.MainGameScreen.SetActive(false);
                 GameManager.Instance.GameOverScreen.SetActive(true);
@@ -127,5 +127,22 @@ public class PlayerController : MonoBehaviour
         }
 
         isInvulnerable = false;
+    }
+
+    private void MuteAllAndPlayDeath()
+    {
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+        foreach (AudioSource source in allAudioSources)
+        {
+            if (source != marioAudio)
+            {
+                source.mute = true;
+            }
+        }
+
+        marioAudio.mute = false;
+        marioAudio.PlayOneShot(marioDeath);
+
     }
 }

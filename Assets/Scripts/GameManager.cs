@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Ensure there is only ever one manager
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = 1.0f;
 
-            // Reset the variable so future fresh boots work normally
             isGameRestart = false;
         }
         else
@@ -60,7 +58,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        // Updates both screens simultaneously 
         if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
         if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
         if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;

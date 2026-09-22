@@ -17,7 +17,7 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) // Change to your attack button/key
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             animator.SetTrigger("Swing");
 
