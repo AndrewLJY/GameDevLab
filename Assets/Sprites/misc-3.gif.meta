@@ -1421,7 +1421,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_62
+      name: pipe_side_head
       rect:
         serializedVersion: 2
         x: 573
@@ -1443,7 +1443,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_63
+      name: pipe_intersection
       rect:
         serializedVersion: 2
         x: 610
@@ -9709,8 +9709,6 @@ TextureImporter:
       misc-3_6: -298137824
       misc-3_60: 1870847267
       misc-3_61: 1442400606
-      misc-3_62: -422033940
-      misc-3_63: 482291209
       misc-3_64: 1200620243
       misc-3_65: -12720940
       misc-3_66: 112768300
@@ -9747,6 +9745,8 @@ TextureImporter:
       misc-3_99: -397881505
       pipe_body: -120231986
       pipe_head: 1471859488
+      pipe_intersection: 482291209
+      pipe_side_head: -422033940
       question_block: 276706015
       small_hill: -471315425
   mipmapLimitGroupName: 
