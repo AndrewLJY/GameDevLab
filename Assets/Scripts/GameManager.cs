@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private int currentScore = 0;
     private static bool isGameRestart = false;
 
+    public AudioSource gameAudio;
+    public AudioClip bgMusic;
     public GameObject enemies;
     public GameObject playerHearts;
 
@@ -45,6 +47,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        gameAudio.PlayOneShot(bgMusic);
+    }
+
     public void AddScore(int amount)
     {
         currentScore += amount;
@@ -61,21 +68,13 @@ public class GameManager : MonoBehaviour
 
     public void StartButtonCallback(int input)
     {
-        Debug.Log("Start!");
-
         MainMenuScreen.SetActive(false);
 
-        // resume time
         Time.timeScale = 1.0f;
     }
 
     public void RestartButtonCallback(int input)
     {
-        Debug.Log("Restart!");
-        // reset everything
-        //ResetGame();
-
-        // resume time
         Time.timeScale = 1.0f;
 
         isGameRestart = true;
@@ -83,35 +82,36 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void ResetGame()
-    {
-        // reset position
-        mario.GetComponent<Transform>().position = new Vector3(-0.947f, -0.292f, 0.0f);
-        mario.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+    // Keep just in case
+    //private void ResetGame()
+    //{
+    //    // reset position
+    //    mario.GetComponent<Transform>().position = new Vector3(-0.947f, -0.292f, 0.0f);
+    //    mario.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
 
-        // reset sprite direction
-        playerController.faceRightState = true;
-        playerController.playerHealth = 3;
+    //    // reset sprite direction
+    //    playerController.faceRightState = true;
+    //    playerController.playerHealth = 3;
 
-        // reset Goomba
-        foreach (Transform enemy in enemies.transform)
-        {
-            enemy.transform.localPosition = enemy.GetComponent<EnemyController>().startPosition;
-            enemy.GetComponent<EnemyController>().enemyHealth = 3;
-        }
+    //    // reset Goomba
+    //    foreach (Transform enemy in enemies.transform)
+    //    {
+    //        enemy.transform.localPosition = enemy.GetComponent<EnemyController>().startPosition;
+    //        enemy.GetComponent<EnemyController>().enemyHealth = 3;
+    //    }
 
-        // reset score
-        currentScore = 0;
-        UpdateScoreUI();
+    //    // reset score
+    //    currentScore = 0;
+    //    UpdateScoreUI();
 
-        foreach (Transform heart in playerHearts.transform)
-        {
-            heart.gameObject.SetActive(true);
-        }
+    //    foreach (Transform heart in playerHearts.transform)
+    //    {
+    //        heart.gameObject.SetActive(true);
+    //    }
 
-        MainGameScreen.SetActive(true);
-        GameOverScreen.SetActive(false);
-    }
+    //    MainGameScreen.SetActive(true);
+    //    GameOverScreen.SetActive(false);
+    //}
 
     public void LevelClear()
     {

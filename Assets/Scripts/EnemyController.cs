@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
-    public Animator animator;
+    [System.NonSerialized] public Animator animator;
+    [System.NonSerialized] public bool isInvulnerable = false;
     private float originalX;
     private float moveSpeed = 0.5f;
     public int enemyHealth = 3;
-    public bool isInvulnerable = false;
     private Rigidbody2D enemyBody;
-    public Vector3 startPosition; 
+    [System.NonSerialized] public Vector3 startPosition; 
 
     private float knockbackTimer = 0f;
     private Transform playerTransform;
@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         startPosition = transform.localPosition;
-        Debug.Log("startPosition: " + startPosition);
     }
 
     void Start()
@@ -53,17 +52,12 @@ public class EnemyController : MonoBehaviour
             ApplyKnockback(knockbackDirection, knockbackForce);
 
             enemyHealth -= 1;
-            Debug.Log("enemy.enemyHealth" + enemyHealth);
 
             if (enemyHealth < 1)
             {
                 animator.SetTrigger("onDead");
                 GameManager.Instance.AddScore(1);
             }
-        }
-        else
-        {
-            Debug.Log("ITS INVULNERABLEEEE");
         }
     }
 
@@ -87,12 +81,10 @@ public class EnemyController : MonoBehaviour
         }
         else if(playerTransform != null)
         {
-            // Calculate horizontal direction to the player (-1 for Left, 1 for Right)
             float directionToPlayer = Mathf.Sign(playerTransform.position.x - transform.position.x);
 
             enemyBody.linearVelocity = new Vector2(directionToPlayer * moveSpeed, enemyBody.linearVelocity.y);
 
-            // Flip the Goomba to face the player
             if (directionToPlayer > 0)
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             else

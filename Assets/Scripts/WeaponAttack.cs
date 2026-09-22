@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class WeaponAttack : MonoBehaviour
 {
     private Animator animator;
+
+    public AudioSource weaponAudio;
+    public AudioClip weaponSwing;
 
     private float knockbackForce = 2f;
 
@@ -15,7 +19,6 @@ public class WeaponAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return)) // Change to your attack button/key
         {
-            Debug.Log("Swingggggggggggggggg");
             animator.SetTrigger("Swing");
 
         }
@@ -26,8 +29,10 @@ public class WeaponAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-
-            Debug.Log("We sliced the enemy!");
+            if (!weaponAudio.isPlaying)
+            {
+                weaponAudio.PlayOneShot(weaponSwing);
+            }
             other.GetComponent<EnemyController>().TakeDamage(gameObject.GetComponent<Collider2D>(), knockbackForce);
 
         }

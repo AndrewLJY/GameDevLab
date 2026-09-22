@@ -9,29 +9,29 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized] public bool isInvulnerable = false;
 
     [System.NonSerialized] public bool faceRightState = true;
+    [System.NonSerialized] public int playerHealth = 3;
     public float speed = 7;
     public float maxSpeed = 15;
-    [System.NonSerialized] public int playerHealth = 3;
     public float upSpeed = 5;
     private bool onGroundState = true;
 
+    public AudioClip marioDeath;
+    public AudioClip marioDmg;
+    public AudioSource marioAudio;
     private SpriteRenderer marioSprite;
     private Rigidbody2D marioBody;
     public GameObject playerHearts;
 
-    // Start is called before the first frame update
     void Start()
     {
         marioSprite = GetComponent<SpriteRenderer>();
 
-        // Set to be 30 FPS
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A) && faceRightState)
@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && !faceRightState)
         {
             faceRightState = true;
-            
             Flip();
         }
     }
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
     void Flip()
     {
 
-        // Multiply the player's x local scale by -1
         Vector3 currentScale = transform.localScale;
         currentScale.x *= -1;
         transform.localScale = currentScale;
@@ -66,7 +64,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // FixedUpdate is called 50 times a second
     void FixedUpdate()
     {
         if (!isInvulnerable)
@@ -78,21 +75,19 @@ public class PlayerController : MonoBehaviour
             if (isWalking)
             {
                 Vector2 movement = new Vector2(moveHorizontal, 0);
-                // check if it doesn't go beyond maxSpeed
                 if (marioBody.linearVelocity.magnitude < maxSpeed)
                     marioBody.AddForce(movement * speed);
             }
 
-            // stop
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
             {
-                // stop
                 marioBody.linearVelocity = Vector2.zero;
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && onGroundState)
             {
                 animator.SetBool("isJumping", true);
+                marioAudio.PlayOneShot(marioAudio.clip);
                 marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
                 onGroundState = false;
             }
@@ -102,7 +97,6 @@ public class PlayerController : MonoBehaviour
     public void ApplyKnockback(Vector2 direction)
     {
         isInvulnerable = true;
-        //knockbackTimer = 1f;
         marioBody.linearVelocity = Vector2.zero;
         marioBody.AddForce(direction * 4f, ForceMode2D.Impulse);
     }
@@ -111,9 +105,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvulnerable)
         {
-            Debug.Log("Collided with goomba!");
             isInvulnerable = true;
 
+            marioAudio.PlayOneShot(marioDmg);
             animator.SetTrigger("TakingDmg");
             Vector2 heading = transform.position - other.transform.position;
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
@@ -125,6 +119,7 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealth <= 0)
             {
+                marioAudio.PlayOneShot(marioDeath);
                 Time.timeScale = 0.0f;
                 GameManager.Instance.MainGameScreen.SetActive(false);
                 GameManager.Instance.GameOverScreen.SetActive(true);
