@@ -6,15 +6,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private int currentScore = 0;
+    [System.NonSerialized]
+    public PlayerController playerController;
+
     public GameObject mario;
-    public PlayerMovement playerMovement;
     public TextMeshProUGUI mainGameScoreText;
     public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI levelClearScoreText;
     public GameObject MainGameScreen;
     public GameObject GameOverScreen;
-    public GameObject MainMenuScreen;
+    public GameObject MainMenuScreen; 
+    public GameObject LevelClearScreen;
 
+    private int currentScore = 0;
     private static bool isGameRestart = false;
 
     public GameObject enemies;
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour
         // Updates both screens simultaneously 
         if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
         if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
+        if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
     }
 
     public void StartButtonCallback(int input)
@@ -85,14 +90,14 @@ public class GameManager : MonoBehaviour
         mario.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
 
         // reset sprite direction
-        playerMovement.faceRightState = true;
-        playerMovement.playerHealth = 3;
+        playerController.faceRightState = true;
+        playerController.playerHealth = 3;
 
         // reset Goomba
         foreach (Transform enemy in enemies.transform)
         {
-            enemy.transform.localPosition = enemy.GetComponent<EnemyMovement>().startPosition;
-            enemy.GetComponent<EnemyMovement>().enemyHealth = 3;
+            enemy.transform.localPosition = enemy.GetComponent<EnemyController>().startPosition;
+            enemy.GetComponent<EnemyController>().enemyHealth = 3;
         }
 
         // reset score
@@ -106,5 +111,11 @@ public class GameManager : MonoBehaviour
 
         MainGameScreen.SetActive(true);
         GameOverScreen.SetActive(false);
+    }
+
+    public void LevelClear()
+    {
+        Time.timeScale = 0f;
+        LevelClearScreen.SetActive(true);
     }
 }

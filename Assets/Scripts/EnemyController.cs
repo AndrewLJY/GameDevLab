@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public Animator animator;
     private float originalX;
@@ -57,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
 
             if (enemyHealth < 1)
             {
-                Destroy(gameObject);
+                animator.SetTrigger("onDead");
                 GameManager.Instance.AddScore(1);
             }
         }
@@ -65,6 +65,11 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.Log("ITS INVULNERABLEEEE");
         }
+    }
+
+    public void OnDead()
+    {
+        Destroy(gameObject);
     }
 
     void FixedUpdate()
@@ -100,7 +105,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerMovement>().TakeDamage(gameObject.GetComponent<Collider2D>());
+            other.GetComponent<PlayerController>().TakeDamage(gameObject.GetComponent<Collider2D>());
         }
     }
 }

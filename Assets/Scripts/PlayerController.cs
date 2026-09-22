@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    private SpriteRenderer marioSprite;
-    [SerializeField] private Sprite jumpSprite;
+    [System.NonSerialized] public Animator animator;
+    [System.NonSerialized] public bool isInvulnerable = false;
 
-    public bool faceRightState = true;
-    public float speed = 1;
-    public float maxSpeed = 3;
-    public int playerHealth = 3;
-    public float upSpeed = 10;
+    [System.NonSerialized] public bool faceRightState = true;
+    public float speed = 7;
+    public float maxSpeed = 15;
+    [System.NonSerialized] public int playerHealth = 3;
+    public float upSpeed = 5;
     private bool onGroundState = true;
-    public bool isInvulnerable = false;
-    //private float knockbackTimer = 0f;
 
+    private SpriteRenderer marioSprite;
     private Rigidbody2D marioBody;
-    public GameManager gameManager;
     public GameObject playerHearts;
-    public Animator animator;
 
     // Start is called before the first frame update
     void Start()

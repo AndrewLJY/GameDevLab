@@ -2367,7 +2367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_106
+      name: star_flag
       rect:
         serializedVersion: 2
         x: 389
@@ -9223,7 +9223,6 @@ TextureImporter:
       misc-3_100: -246546002
       misc-3_101: -2082588016
       misc-3_102: -622418974
-      misc-3_106: -1294900636
       misc-3_107: -664080628
       misc-3_108: -227630354
       misc-3_109: -463026536
@@ -9749,6 +9748,7 @@ TextureImporter:
       pipe_side_head: -422033940
       question_block: 276706015
       small_hill: -471315425
+      star_flag: -1294900636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

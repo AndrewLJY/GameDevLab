@@ -28,7 +28,7 @@ public class WeaponAttack : MonoBehaviour
         {
 
             Debug.Log("We sliced the enemy!");
-            other.GetComponent<EnemyMovement>().TakeDamage(gameObject.GetComponent<Collider2D>(), knockbackForce);
+            other.GetComponent<EnemyController>().TakeDamage(gameObject.GetComponent<Collider2D>(), knockbackForce);
 
         }
 
