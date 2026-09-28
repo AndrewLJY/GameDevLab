@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Ground") || col.gameObject.CompareTag("Obstacles")) 
+        if (col.gameObject.CompareTag("Ground") || col.gameObject.CompareTag("Obstacles"))
         {
             animator.SetBool("isJumping", false);
             onGroundState = true;

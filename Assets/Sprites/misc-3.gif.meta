@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: misc-3_0
+      name: box_coin_1
       rect:
         serializedVersion: 2
         x: 434
@@ -717,7 +717,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_30
+      name: disabled_box
       rect:
         serializedVersion: 2
         x: 373
@@ -1663,7 +1663,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_74
+      name: box_coin_2
       rect:
         serializedVersion: 2
         x: 440
@@ -1685,7 +1685,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_75
+      name: box_coin_3
       rect:
         serializedVersion: 2
         x: 448
@@ -1707,7 +1707,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_76
+      name: box_coin_4
       rect:
         serializedVersion: 2
         x: 461
@@ -1817,7 +1817,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_81
+      name: question_block_blink_1
       rect:
         serializedVersion: 2
         x: 390
@@ -1839,7 +1839,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_82
+      name: question_block_blink_2
       rect:
         serializedVersion: 2
         x: 408
@@ -9209,15 +9209,19 @@ TextureImporter:
       3_cloud: 1916945491
       3_shrub: 217611616
       big_hill: -1826444368
+      box_coin_1: -981242194
+      box_coin_2: -1722157080
+      box_coin_3: 849866297
+      box_coin_4: 442615376
       brick: -915299473
       coin: 1185937349
+      disabled_box: 1022145759
       goomba_dead: 998783009
       goomba_left: -348658204
       goomba_right: -1166754851
       ground_brown: -1692987874
       hammer_up: -1068523615
       magic_mushroom: -666289827
-      misc-3_0: -981242194
       misc-3_1: -1141243883
       misc-3_10: 1527029042
       misc-3_100: -246546002
@@ -9432,7 +9436,6 @@ TextureImporter:
       misc-3_298: -837106400
       misc-3_299: -123915804
       misc-3_3: -1122827105
-      misc-3_30: 1022145759
       misc-3_300: 1359518944
       misc-3_301: -1028721164
       misc-3_302: -974134291
@@ -9717,14 +9720,9 @@ TextureImporter:
       misc-3_70: -1896105408
       misc-3_71: 724555081
       misc-3_72: 870065557
-      misc-3_74: -1722157080
-      misc-3_75: 849866297
-      misc-3_76: 442615376
       misc-3_77: 2064584894
       misc-3_78: 657601228
       misc-3_8: -2105726688
-      misc-3_81: 455635952
-      misc-3_82: -1234363973
       misc-3_83: 1355235711
       misc-3_84: -1676529894
       misc-3_85: -1746235199
@@ -9747,6 +9745,8 @@ TextureImporter:
       pipe_intersection: 482291209
       pipe_side_head: -422033940
       question_block: 276706015
+      question_block_blink_1: 455635952
+      question_block_blink_2: -1234363973
       small_hill: -471315425
       star_flag: -1294900636
   mipmapLimitGroupName: 
