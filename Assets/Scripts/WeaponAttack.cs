@@ -17,13 +17,8 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            animator.SetTrigger("Swing");
-
-        }
+        
     }
-
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -37,5 +32,11 @@ public class WeaponAttack : MonoBehaviour
 
         }
 
+    }
+
+    public void PlaySwingAnim()
+    {
+        Debug.Log("Playing weapon swing animation");
+        animator.SetTrigger("Swing");
     }
 }
