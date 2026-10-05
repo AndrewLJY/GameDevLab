@@ -192,19 +192,13 @@ public class PlayerController : MonoBehaviour
 
     public void GameRestart()
     {
-        // reset position
         marioBody.transform.position = new Vector3(-0.947f, -0.318f, 0.0f);
-        
-        // reset sprite direction
-        faceRightState = true;
-        //marioSprite.flipX = false;
+        marioBody.transform.localScale = new Vector3(1f, 1f, 1f);
+        marioBody.linearVelocity = Vector2.zero;
 
-        // reset animation
-        animator.SetTrigger("gameRestart");
+        faceRightState = true;
+        animator.Play("Idle");
         playerHealth = 3;
         isInvulnerable = false;
-
-        // reset camera position
-        //gameCamera.position = new Vector3(0, 0, -10);
     }
 }

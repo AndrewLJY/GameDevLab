@@ -87,19 +87,6 @@ public class GameManager : MonoBehaviour
         gameOver.Invoke();
     }
 
-    //public void AddScore(int amount)
-    //{
-    //    currentScore += amount;
-    //    UpdateScoreUI();
-    //}
-
-    //private void UpdateScoreUI()
-    //{
-    //    if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
-    //    if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
-    //    if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
-    //}
-
     public void StartButtonCallback(int input)
     {
         gameStart.Invoke();
