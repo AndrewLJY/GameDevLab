@@ -4,10 +4,10 @@ public class PlayerHealthManager : MonoBehaviour
 {
     public void ResetPlayerHearts()
     {
-        foreach (GameObject child in transform)
+        foreach (Transform child in transform)
         {
-            Debug.Log(gameObject);
-            child.SetActive(true);
+            Debug.Log("player heart");
+            child.gameObject.SetActive(true);
         }
     }
 }

@@ -45,20 +45,11 @@ public class PlayerController : MonoBehaviour
     {
     }
 
-    //void Flip()
-    //{
-
-    //    Vector3 currentScale = transform.localScale;
-    //    currentScale.x *= -1;
-    //    transform.localScale = currentScale;
-    //}
-
     void Move(int value)
     {
 
         Vector2 movement = new Vector2(value, 0);
         animator.SetBool("isWalking", isMoving);
-        // check if it doesn't go beyond maxSpeed
         if (marioBody.linearVelocity.magnitude < maxSpeed)
             marioBody.AddForce(movement * speed);
     }
@@ -85,12 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHealth > 0 && onGroundState)
         {
-            // jump
             marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
             jumpedState = true;
             marioAudio.PlayOneShot(marioAudio.clip);
-            // update animator state
             animator.SetBool("isJumping", true);
 
         }
@@ -100,7 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHealth > 0 && jumpedState)
         {
-            // jump higher
             marioBody.AddForce(Vector2.up * upSpeed * 30, ForceMode2D.Force);
             jumpedState = false;
 
@@ -116,9 +104,6 @@ public class PlayerController : MonoBehaviour
             faceRightState = false;
             currentScale.x = value;
             transform.localScale = currentScale;
-            //  marioSprite.flipX = true;
-            //  if (marioBody.linearVelocity.x > 0.05f)
-            //    animator.SetTrigger("onSkid");
 
         }
 
@@ -127,9 +112,6 @@ public class PlayerController : MonoBehaviour
             faceRightState = true;
             currentScale.x = value;
             transform.localScale = currentScale;
-            //  marioSprite.flipX = false;
-            //  if (marioBody.linearVelocity.x < -0.05f)
-            //    animator.SetTrigger("onSkid");
         }
     }
 
@@ -146,19 +128,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvulnerable)
         {
-            //float moveHorizontal = Input.GetAxisRaw("Horizontal");
             
             if (playerHealth > 0 && isMoving)
             {
                 Move(faceRightState == true ? 1 : -1);
             }
 
-            //if (isMoving)
-            //{
-            //    Vector2 movement = new Vector2(moveHorizontal, 0);
-            //    if (marioBody.linearVelocity.magnitude < maxSpeed)
-            //        marioBody.AddForce(movement * speed);
-            //}
         }
     }
 
@@ -187,7 +162,6 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealth <= 0)
             {
-                animator.Play("MarioDie");
                 MuteAllAndPlayDeath();
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
@@ -216,19 +190,13 @@ public class PlayerController : MonoBehaviour
 
     public void GameRestart()
     {
-        // reset position
         marioBody.transform.position = new Vector3(-0.947f, -0.318f, 0.0f);
-        
-        // reset sprite direction
-        faceRightState = true;
-        //marioSprite.flipX = false;
+        marioBody.transform.localScale = new Vector3(1f, 1f, 1f);
+        marioBody.linearVelocity = Vector2.zero;
 
-        // reset animation
-        animator.SetTrigger("gameRestart");
+        faceRightState = true;
+        animator.Play("Idle");
         playerHealth = 3;
         isInvulnerable = false;
-
-        // reset camera position
-        //gameCamera.position = new Vector3(0, 0, -10);
     }
 }

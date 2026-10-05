@@ -1016,6 +1016,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
     - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
       objectReference: {fileID: 0}
@@ -2402,6 +2406,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
     - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
       objectReference: {fileID: 0}
@@ -3254,6 +3262,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
+    - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
@@ -5629,6 +5641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1479736778}
+  - component: {fileID: 1479736779}
   m_Layer: 0
   m_Name: Obstacles
   m_TagString: Untagged
@@ -5659,6 +5672,18 @@ Transform:
   - {fileID: 786187581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1479736779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479736777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3c11117df49ef4fbeeacc58cde9bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstaclesManager
 --- !u!1 &1496912320
 GameObject:
   m_ObjectHideFlags: 0
@@ -7135,6 +7160,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
     - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
       objectReference: {fileID: 0}
@@ -7344,7 +7373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   mario: {fileID: 1163536754}
-  MainMenuScreen: {fileID: 144112755}
   gameAudio: {fileID: 1998984346}
   bgMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
   enemies: {fileID: 364453836}
@@ -7403,9 +7431,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainGameHUDManager, Assembly-CSharp
+      - m_Target: {fileID: 2135189889}
+        m_TargetAssemblyTypeName: PlayerHealthManager, Assembly-CSharp
         m_MethodName: ResetPlayerHearts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1479736779}
+        m_TargetAssemblyTypeName: ObstaclesManager, Assembly-CSharp
+        m_MethodName: ResetObstacles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7471,7 +7511,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
@@ -7974,6 +8014,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
     - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
+      propertyPath: useInt.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
       objectReference: {fileID: 0}
@@ -7981,6 +8029,10 @@ PrefabInstance:
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1998984345}
+    - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
+      propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 440757939623201487, guid: 4414b761b6e77cf41b7eefcd5a88b445, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: IncreaseScore
@@ -8368,6 +8420,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1479736778}
     m_Modifications:
+    - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
+      propertyPath: parameter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1043853113691812197, guid: 99921e1b4bd995d4f87c99047ffffd91, type: 3}
       propertyPath: useInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3

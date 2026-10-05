@@ -24,12 +24,10 @@ public class HUDManager : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject levelClearPanel;
 
-    // Start is called before the first frame update
     void Start()
     {
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -64,6 +62,7 @@ public class HUDManager : MonoBehaviour
 
     public void SetScore(int score)
     {
+        Debug.Log("increasing score");
         scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString();
     }
 
