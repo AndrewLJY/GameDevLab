@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Weapon
   - Obstacles
+  - Manager
   layers:
   - Default
   - TransparentFX
