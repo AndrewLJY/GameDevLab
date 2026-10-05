@@ -36,7 +36,6 @@ public class WeaponAttack : MonoBehaviour
 
     public void PlaySwingAnim()
     {
-        Debug.Log("Playing weapon swing animation");
         animator.SetTrigger("Swing");
     }
 }
