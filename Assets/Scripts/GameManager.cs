@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void GameRestart()
     {
-
         currentScore = 0;
         SetScore(currentScore);
         gameRestart.Invoke();
@@ -75,6 +74,31 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         gameOver.Invoke();
     }
+
+    public void SetScore(int score)
+    {
+        scoreChange.Invoke(score);
+    }
+
+
+    public void GameOver()
+    {
+        Time.timeScale = 0.0f;
+        gameOver.Invoke();
+    }
+
+    //public void AddScore(int amount)
+    //{
+    //    currentScore += amount;
+    //    UpdateScoreUI();
+    //}
+
+    //private void UpdateScoreUI()
+    //{
+    //    if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
+    //    if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
+    //    if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
+    //}
 
     public void StartButtonCallback(int input)
     {

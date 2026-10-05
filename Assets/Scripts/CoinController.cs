@@ -11,7 +11,6 @@ public class CoinController : MonoBehaviour
 
     public int parameter;
     public UnityEvent<int> useInt;
-
     void Start()
     {
         animator = GetComponent<Animator>();

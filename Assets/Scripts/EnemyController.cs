@@ -20,6 +20,10 @@ public class EnemyController : MonoBehaviour
 
     GameManager gameManager;
 
+    public int enemyHealth = 3;
+
+    GameManager gameManager;
+
     void Awake()
     {
         startPosition = transform.localPosition;
