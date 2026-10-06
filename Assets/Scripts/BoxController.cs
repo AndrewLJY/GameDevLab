@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class BoxController : MonoBehaviour
 
@@ -23,6 +22,7 @@ public class BoxController : MonoBehaviour
             animator = transform.parent.GetComponent<Animator>();
         }
 
+        Debug.Log(gameObject.name + " isThereCoin: " + isThereCoin);
     }
 
     void Update()
@@ -47,11 +47,5 @@ public class BoxController : MonoBehaviour
     public void DisableBox()
     {
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-    }
-
-    public void GameRestart()
-    {
-        if (gameObject.name == "Question-Box") animator.SetBool("boxDisabled", false);
-        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 }

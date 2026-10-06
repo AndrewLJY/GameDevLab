@@ -17,6 +17,7 @@ public class ActionManager : MonoBehaviour
         }
         else if (context.performed)
         {
+            Debug.Log(context.duration);
             jumpHold.Invoke();
         }
         else if (context.canceled)
@@ -59,14 +60,14 @@ public class ActionManager : MonoBehaviour
 
     public void OnClickAction(InputAction.CallbackContext context)
     {
-        if (context.started) ;
-        //Debug.Log("mouse click started");
+        if (context.started)
+            Debug.Log("mouse click started");
         else if (context.performed)
         {
-            //Debug.Log("mouse click performed");
+            Debug.Log("mouse click performed");
         }
-        else if (context.canceled) ;
-            //Debug.Log("mouse click cancelled");
+        else if (context.canceled)
+            Debug.Log("mouse click cancelled");
     }
 
     public void OnPointAction(InputAction.CallbackContext context)
@@ -74,7 +75,7 @@ public class ActionManager : MonoBehaviour
         if (context.performed)
         {
             Vector2 point = context.ReadValue<Vector2>();
-            //Debug.Log($"Point detected: {point}");
+            Debug.Log($"Point detected: {point}");
 
         }
     }
@@ -84,7 +85,7 @@ public class ActionManager : MonoBehaviour
         if (context.performed)
         {
             attack.Invoke();
-            //Debug.Log($"Weapon attack");
+            Debug.Log($"Weapon attack");
         }
     }
 }

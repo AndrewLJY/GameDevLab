@@ -11,7 +11,6 @@ public class CoinController : MonoBehaviour
 
     public int parameter;
     public UnityEvent<int> useInt;
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,7 +30,7 @@ public class CoinController : MonoBehaviour
     public void CoinTaken()
     {
         gameObject.SetActive(false);
-        if (box.name == "Question-Box")
+        if(box.name == "Question-Box")
         {
             box.GetComponent<BoxController>().DisableBox();
         }
@@ -39,12 +38,8 @@ public class CoinController : MonoBehaviour
 
     public void TriggerIntEvent()
     {
-        Debug.Log("trigger int event");
-        useInt.Invoke(parameter);
-    }
 
-    public void GameRestart()
-    {
-        gameObject.SetActive(true);
+        useInt.Invoke(parameter); // safe to invoke even without callbacks
+
     }
 }

@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
 
     public GameObject mario;
+    //public TextMeshProUGUI mainGameScoreText;
+    //public TextMeshProUGUI gameOverScoreText;
+    //public TextMeshProUGUI levelClearScoreText;
+    //public GameObject MainGameScreen;
+    //public GameObject GameOverScreen;
+    public GameObject MainMenuScreen;
+    //public GameObject LevelClearScreen;
 
     private int currentScore = 0;
     private static bool isGameRestart = false;
@@ -34,6 +41,8 @@ public class GameManager : MonoBehaviour
 
         if (isGameRestart)
         {
+            MainMenuScreen.SetActive(false);
+
             Time.timeScale = 1.0f;
 
             isGameRestart = false;
@@ -51,27 +60,10 @@ public class GameManager : MonoBehaviour
 
     public void GameRestart()
     {
+        // reset score
         currentScore = 0;
         SetScore(currentScore);
         gameRestart.Invoke();
-
-        InterruptAudioSources();
-
-        if (gameAudio != null)
-        {
-            gameAudio.mute = false;
-
-            gameAudio.Stop();
-
-            if (gameAudio.clip != null)
-            {
-                gameAudio.time = 0f;
-            }
-
-            gameAudio.Play();
-        }
-
-        UnmuteAllAudioSources();
 
         Time.timeScale = 1.0f;
     }
@@ -94,8 +86,25 @@ public class GameManager : MonoBehaviour
         gameOver.Invoke();
     }
 
+    //public void AddScore(int amount)
+    //{
+    //    currentScore += amount;
+    //    UpdateScoreUI();
+    //}
+
+    //private void UpdateScoreUI()
+    //{
+    //    if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
+    //    if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
+    //    if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
+    //}
+
     public void StartButtonCallback(int input)
     {
+        //MainMenuScreen.SetActive(false);
+
+        //Time.timeScale = 1.0f;
+
         gameStart.Invoke();
         Time.timeScale = 1.0f;
     }
@@ -145,23 +154,5 @@ public class GameManager : MonoBehaviour
 
         levelClear.Invoke();
         Time.timeScale = 0.0f;
-    }
-
-    void InterruptAudioSources()
-    {
-        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (AudioSource audio in allAudioSources)
-        {
-            audio.Stop();
-        }
-    }
-
-    void UnmuteAllAudioSources()
-    {
-        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        foreach (AudioSource audio in allAudioSources)
-        {
-            audio.mute = false;
-        }
     }
 }

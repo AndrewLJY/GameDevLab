@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
 
     public void OnDead()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     void FixedUpdate()
@@ -109,15 +109,12 @@ public class EnemyController : MonoBehaviour
 
     public void GameRestart()
     {
-        gameObject.SetActive(true);
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        animator.SetTrigger("gameRestart");
-
         transform.localPosition = startPosition;
         originalX = transform.position.x;
-
         enemyHealth = 3;
         isInvulnerable = false;
         knockbackTimer = 0f;
+        //moveRight = -1;
+        //ComputeVelocity();
     }
 }
