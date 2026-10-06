@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,16 +14,13 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 15;
     public float upSpeed = 5;
     private bool onGroundState = true;
-    private bool isMoving = false;
-    private bool jumpedState = false;
 
-    private SpriteRenderer marioSprite;
-    private Rigidbody2D marioBody;
     public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
+    private SpriteRenderer marioSprite;
+    private Rigidbody2D marioBody;
     public GameObject playerHearts;
-    public MarioActions marioActions;
 
     void Start()
     {
@@ -39,105 +34,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.A) && faceRightState)
-        //{
-        //    faceRightState = false;
-        //    Flip();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.D) && !faceRightState)
-        //{
-        //    faceRightState = true;
-        //    Flip();
-        //}
-    }
-
-    //void Flip()
-    //{
-
-    //    Vector3 currentScale = transform.localScale;
-    //    currentScale.x *= -1;
-    //    transform.localScale = currentScale;
-    //}
-
-    void Move(int value)
-    {
-
-        Vector2 movement = new Vector2(value, 0);
-        animator.SetBool("isWalking", isMoving);
-        // check if it doesn't go beyond maxSpeed
-        if (marioBody.linearVelocity.magnitude < maxSpeed)
-            marioBody.AddForce(movement * speed);
-    }
-
-    public void MoveCheck(int value)
-    {
-        if (value == 0)
-        {
-            isMoving = false;
-            animator.SetBool("isWalking", isMoving);
-
-        }
-        else
-        {
-            FlipMarioSprite(value);
-            isMoving = true;
-            animator.SetBool("isWalking", isMoving);
-
-            Move(value);
-        }
-    }
-
-    public void Jump()
-    {
-        if (playerHealth > 0 && onGroundState)
-        {
-            // jump
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-            onGroundState = false;
-            jumpedState = true;
-            marioAudio.PlayOneShot(marioAudio.clip);
-            // update animator state
-            animator.SetBool("isJumping", true);
-
-        }
-    }
-
-    public void JumpHold()
-    {
-        if (playerHealth > 0 && jumpedState)
-        {
-            // jump higher
-            marioBody.AddForce(Vector2.up * upSpeed * 30, ForceMode2D.Force);
-            jumpedState = false;
-
-        }
-    }
-
-    void FlipMarioSprite(int value)
-    {
-        Vector3 currentScale = transform.localScale;
-        
-        if (value == -1 && faceRightState)
+        if (Input.GetKeyDown(KeyCode.A) && faceRightState)
         {
             faceRightState = false;
-            currentScale.x = value;
-            transform.localScale = currentScale;
-            //  marioSprite.flipX = true;
-            //  if (marioBody.linearVelocity.x > 0.05f)
-            //    animator.SetTrigger("onSkid");
-
+            Flip();
         }
 
-        else if (value == 1 && !faceRightState)
+        if (Input.GetKeyDown(KeyCode.D) && !faceRightState)
         {
             faceRightState = true;
-            currentScale.x = value;
-            transform.localScale = currentScale;
-            //  marioSprite.flipX = false;
-            //  if (marioBody.linearVelocity.x < -0.05f)
-            //    animator.SetTrigger("onSkid");
+            Flip();
         }
+    }
+
+    void Flip()
+    {
+
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -153,32 +68,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvulnerable)
         {
-            //float moveHorizontal = Input.GetAxisRaw("Horizontal");
-            
-            if (playerHealth > 0 && isMoving)
+            float moveHorizontal = Input.GetAxisRaw("Horizontal");
+            bool isWalking = Mathf.Abs(moveHorizontal) > 0.3f;
+            animator.SetBool("isWalking", isWalking);
+
+            if (isWalking)
             {
-                Move(faceRightState == true ? 1 : -1);
+                Vector2 movement = new Vector2(moveHorizontal, 0);
+                if (marioBody.linearVelocity.magnitude < maxSpeed)
+                    marioBody.AddForce(movement * speed);
             }
 
-            //if (isMoving)
-            //{
-            //    Vector2 movement = new Vector2(moveHorizontal, 0);
-            //    if (marioBody.linearVelocity.magnitude < maxSpeed)
-            //        marioBody.AddForce(movement * speed);
-            //}
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                marioBody.linearVelocity = Vector2.zero;
+            }
 
-            //if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-            //{
-            //    marioBody.linearVelocity = Vector2.zero;
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.Space) && onGroundState)
-            //{
-            //    animator.SetBool("isJumping", true);
-            //    marioAudio.PlayOneShot(marioAudio.clip);
-            //    marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-            //    onGroundState = false;
-            //}
+            if (Input.GetKeyDown(KeyCode.Space) && onGroundState)
+            {
+                animator.SetBool("isJumping", true);
+                marioAudio.PlayOneShot(marioAudio.clip);
+                marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+                onGroundState = false;
+            }
         }
     }
 
