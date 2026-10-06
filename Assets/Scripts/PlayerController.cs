@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [System.NonSerialized] public Animator animator;
+    [System.NonSerialized] public Animator marioAnimator;
     [System.NonSerialized] public bool isInvulnerable = false;
 
     [System.NonSerialized] public bool faceRightState = true;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
+    public AudioSource marioDeathAudio;
     public GameObject playerHearts;
     public MarioActions marioActions;
 
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        marioAnimator = GetComponent<Animator>();
 
     }
 
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 movement = new Vector2(value, 0);
-        animator.SetBool("isWalking", isMoving);
+        marioAnimator.SetBool("isWalking", isMoving);
         if (marioBody.linearVelocity.magnitude < maxSpeed)
             marioBody.AddForce(movement * speed);
     }
@@ -59,14 +60,14 @@ public class PlayerController : MonoBehaviour
         if (value == 0)
         {
             isMoving = false;
-            animator.SetBool("isWalking", isMoving);
+            marioAnimator.SetBool("isWalking", isMoving);
 
         }
         else
         {
             FlipMarioSprite(value);
             isMoving = true;
-            animator.SetBool("isWalking", isMoving);
+            marioAnimator.SetBool("isWalking", isMoving);
 
             Move(value);
         }
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
             onGroundState = false;
             jumpedState = true;
             marioAudio.PlayOneShot(marioAudio.clip);
-            animator.SetBool("isJumping", true);
+            marioAnimator.SetBool("isJumping", true);
 
         }
     }
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground") || col.gameObject.CompareTag("Obstacles"))
         {
-            animator.SetBool("isJumping", false);
+            marioAnimator.SetBool("isJumping", false);
             onGroundState = true;
         }
     }
@@ -151,7 +152,7 @@ public class PlayerController : MonoBehaviour
             isInvulnerable = true;
 
             marioAudio.PlayOneShot(marioDmg);
-            animator.SetTrigger("TakingDmg");
+            marioAnimator.SetTrigger("TakingDmg");
             Vector2 heading = transform.position - other.transform.position;
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
             ApplyKnockback(knockbackDirection);
@@ -162,7 +163,8 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealth <= 0)
             {
-                MuteAllAndPlayDeath();
+                //MuteAllAndPlayDeath();
+                marioDeathAudio.PlayOneShot(marioDeathAudio.clip);
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
             }
@@ -171,22 +173,22 @@ public class PlayerController : MonoBehaviour
         isInvulnerable = false;
     }
 
-    private void MuteAllAndPlayDeath()
-    {
-        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+    //private void MuteAllAndPlayDeath()
+    //{
+    //    AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
 
-        foreach (AudioSource source in allAudioSources)
-        {
-            if (source != marioAudio)
-            {
-                source.mute = true;
-            }
-        }
+    //    foreach (AudioSource source in allAudioSources)
+    //    {
+    //        if (source != marioAudio)
+    //        {
+    //            source.mute = true;
+    //        }
+    //    }
 
-        marioAudio.mute = false;
-        marioAudio.PlayOneShot(marioDeath);
+    //    marioAudio.mute = false;
+    //    marioAudio.PlayOneShot(marioDeath);
 
-    }
+    //}
 
     public void GameRestart()
     {
@@ -195,7 +197,7 @@ public class PlayerController : MonoBehaviour
         marioBody.linearVelocity = Vector2.zero;
 
         faceRightState = true;
-        animator.Play("Idle");
+        marioAnimator.Play("Idle");
         playerHealth = 3;
         isInvulnerable = false;
     }
