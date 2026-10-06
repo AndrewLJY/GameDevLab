@@ -7,17 +7,14 @@ public class EnemyController : MonoBehaviour
 {
     [System.NonSerialized] public Animator animator;
     [System.NonSerialized] public bool isInvulnerable = false;
-    [System.NonSerialized] public Vector3 startPosition;
-
     private float originalX;
     private float moveSpeed = 0.5f;
-    private float knockbackTimer = 0f;
-    private Rigidbody2D enemyBody;
-    private Transform playerTransform;
-
     public int enemyHealth = 3;
+    private Rigidbody2D enemyBody;
+    [System.NonSerialized] public Vector3 startPosition; 
 
-    GameManager gameManager;
+    private float knockbackTimer = 0f;
+    private Transform playerTransform;
 
     void Awake()
     {
@@ -26,13 +23,10 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-
         enemyBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-
         if (player != null)
         {
             playerTransform = player.transform;
@@ -62,7 +56,7 @@ public class EnemyController : MonoBehaviour
             if (enemyHealth < 1)
             {
                 animator.SetTrigger("onDead");
-                gameManager.IncreaseScore(1);
+                GameManager.Instance.AddScore(1);
             }
         }
     }
@@ -105,16 +99,5 @@ public class EnemyController : MonoBehaviour
         {
             other.GetComponent<PlayerController>().TakeDamage(gameObject.GetComponent<Collider2D>());
         }
-    }
-
-    public void GameRestart()
-    {
-        transform.localPosition = startPosition;
-        originalX = transform.position.x;
-        enemyHealth = 3;
-        isInvulnerable = false;
-        knockbackTimer = 0f;
-        //moveRight = -1;
-        //ComputeVelocity();
     }
 }

@@ -1,8 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +10,13 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
 
     public GameObject mario;
-    //public TextMeshProUGUI mainGameScoreText;
-    //public TextMeshProUGUI gameOverScoreText;
-    //public TextMeshProUGUI levelClearScoreText;
-    //public GameObject MainGameScreen;
-    //public GameObject GameOverScreen;
-    public GameObject MainMenuScreen;
-    //public GameObject LevelClearScreen;
+    public TextMeshProUGUI mainGameScoreText;
+    public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI levelClearScoreText;
+    public GameObject MainGameScreen;
+    public GameObject GameOverScreen;
+    public GameObject MainMenuScreen; 
+    public GameObject LevelClearScreen;
 
     private int currentScore = 0;
     private static bool isGameRestart = false;
@@ -27,12 +25,6 @@ public class GameManager : MonoBehaviour
     public AudioClip bgMusic;
     public GameObject enemies;
     public GameObject playerHearts;
-
-    public UnityEvent gameStart;
-    public UnityEvent gameRestart;
-    public UnityEvent<int> scoreChange;
-    public UnityEvent gameOver;
-    public UnityEvent levelClear;
 
     void Awake()
     {
@@ -58,54 +50,23 @@ public class GameManager : MonoBehaviour
         gameAudio.PlayOneShot(bgMusic);
     }
 
-    public void GameRestart()
+    public void AddScore(int amount)
     {
-        // reset score
-        currentScore = 0;
-        SetScore(currentScore);
-        gameRestart.Invoke();
-
-        Time.timeScale = 1.0f;
+        currentScore += amount;
+        UpdateScoreUI();
     }
 
-    public void IncreaseScore(int increment)
+    private void UpdateScoreUI()
     {
-        currentScore += increment;
-        SetScore(currentScore);
+        if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
+        if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
+        if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
     }
-
-    public void SetScore(int score)
-    {
-        scoreChange.Invoke(score);
-    }
-
-
-    public void GameOver()
-    {
-        Time.timeScale = 0.0f;
-        gameOver.Invoke();
-    }
-
-    //public void AddScore(int amount)
-    //{
-    //    currentScore += amount;
-    //    UpdateScoreUI();
-    //}
-
-    //private void UpdateScoreUI()
-    //{
-    //    if (mainGameScoreText != null) mainGameScoreText.text = "Score: " + currentScore;
-    //    if (gameOverScoreText != null) gameOverScoreText.text = "Score: " + currentScore;
-    //    if (levelClearScoreText != null) levelClearScoreText.text = "Score: " + currentScore;
-    //}
 
     public void StartButtonCallback(int input)
     {
-        //MainMenuScreen.SetActive(false);
+        MainMenuScreen.SetActive(false);
 
-        //Time.timeScale = 1.0f;
-
-        gameStart.Invoke();
         Time.timeScale = 1.0f;
     }
 
@@ -151,8 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelClear()
     {
-
-        levelClear.Invoke();
-        Time.timeScale = 0.0f;
+        Time.timeScale = 0f;
+        LevelClearScreen.SetActive(true);
     }
 }

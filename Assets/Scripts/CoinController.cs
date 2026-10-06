@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CoinController : MonoBehaviour
 {
@@ -9,8 +6,6 @@ public class CoinController : MonoBehaviour
     public AudioSource coinAudio;
     public GameObject box;
 
-    public int parameter;
-    public UnityEvent<int> useInt;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -34,12 +29,5 @@ public class CoinController : MonoBehaviour
         {
             box.GetComponent<BoxController>().DisableBox();
         }
-    }
-
-    public void TriggerIntEvent()
-    {
-
-        useInt.Invoke(parameter); // safe to invoke even without callbacks
-
     }
 }

@@ -27,12 +27,8 @@ public class PlayerController : MonoBehaviour
     public GameObject playerHearts;
     public MarioActions marioActions;
 
-    GameManager gameManager;
-
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-
         marioSprite = GetComponent<SpriteRenderer>();
 
         Application.targetFrameRate = 30;
@@ -43,6 +39,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.A) && faceRightState)
+        //{
+        //    faceRightState = false;
+        //    Flip();
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.D) && !faceRightState)
+        //{
+        //    faceRightState = true;
+        //    Flip();
+        //}
     }
 
     //void Flip()
@@ -159,6 +166,19 @@ public class PlayerController : MonoBehaviour
             //    if (marioBody.linearVelocity.magnitude < maxSpeed)
             //        marioBody.AddForce(movement * speed);
             //}
+
+            //if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            //{
+            //    marioBody.linearVelocity = Vector2.zero;
+            //}
+
+            //if (Input.GetKeyDown(KeyCode.Space) && onGroundState)
+            //{
+            //    animator.SetBool("isJumping", true);
+            //    marioAudio.PlayOneShot(marioAudio.clip);
+            //    marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+            //    onGroundState = false;
+            //}
         }
     }
 
@@ -187,10 +207,10 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealth <= 0)
             {
-                animator.Play("MarioDie");
                 MuteAllAndPlayDeath();
                 Time.timeScale = 0.0f;
-                gameManager.GameOver();
+                GameManager.Instance.MainGameScreen.SetActive(false);
+                GameManager.Instance.GameOverScreen.SetActive(true);
             }
         }
 
@@ -212,23 +232,5 @@ public class PlayerController : MonoBehaviour
         marioAudio.mute = false;
         marioAudio.PlayOneShot(marioDeath);
 
-    }
-
-    public void GameRestart()
-    {
-        // reset position
-        marioBody.transform.position = new Vector3(-0.947f, -0.318f, 0.0f);
-        
-        // reset sprite direction
-        faceRightState = true;
-        //marioSprite.flipX = false;
-
-        // reset animation
-        animator.SetTrigger("gameRestart");
-        playerHealth = 3;
-        isInvulnerable = false;
-
-        // reset camera position
-        //gameCamera.position = new Vector3(0, 0, -10);
     }
 }
