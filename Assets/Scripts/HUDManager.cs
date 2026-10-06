@@ -62,6 +62,7 @@ public class HUDManager : MonoBehaviour
 
     public void SetScore(int score)
     {
+        Debug.Log("increasing score");
         scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString();
     }
 

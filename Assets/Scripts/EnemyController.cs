@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
-    [System.NonSerialized] public Animator enemyAnimator;
+    [System.NonSerialized] public Animator animator;
     [System.NonSerialized] public bool isInvulnerable = false;
     [System.NonSerialized] public Vector3 startPosition;
 
@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     private float knockbackTimer = 0f;
     private Rigidbody2D enemyBody;
     private Transform playerTransform;
-    private bool isDead = false;
 
     public int enemyHealth = 3;
 
@@ -30,7 +29,7 @@ public class EnemyController : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
 
         enemyBody = GetComponent<Rigidbody2D>();
-        enemyAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -38,7 +37,6 @@ public class EnemyController : MonoBehaviour
         {
             playerTransform = player.transform;
         }
-
     }
 
     public void ApplyKnockback(Vector2 direction, float strength)
@@ -51,31 +49,27 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(Collider2D other, float knockbackForce)
     {
-        if (!isInvulnerable && !isDead)
+        if (!isInvulnerable)
         {
-            enemyAnimator.SetTrigger("onHit");
-            enemyHealth -= 1;
-            Debug.Log("Enemy hit! Current health: " + enemyHealth);
-
+            animator.SetTrigger("onHit");
             Vector2 heading = transform.position - other.transform.position;
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
 
             ApplyKnockback(knockbackDirection, knockbackForce);
 
-            if (enemyHealth <= 0)
-            {
-                enemyAnimator.SetTrigger("onDead");
-                isDead = true;
+            enemyHealth -= 1;
 
+            if (enemyHealth < 1)
+            {
+                animator.SetTrigger("onDead");
+                gameManager.IncreaseScore(1);
             }
         }
     }
 
     public void OnDead()
     {
-        isInvulnerable = false;
         gameObject.SetActive(false);
-        gameManager.IncreaseScore(1);
     }
 
     void FixedUpdate()
@@ -116,19 +110,14 @@ public class EnemyController : MonoBehaviour
     public void GameRestart()
     {
         gameObject.SetActive(true);
-        //enemyAnimator.SetTrigger("gameRestart");
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        animator.SetTrigger("gameRestart");
 
         transform.localPosition = startPosition;
         originalX = transform.position.x;
 
         enemyHealth = 3;
-        isDead = false;
         isInvulnerable = false;
         knockbackTimer = 0f;
-
-        enemyAnimator.ResetTrigger("onHit");
-        enemyAnimator.ResetTrigger("onDead");
-
-        enemyAnimator.Play("Idle");
     }
 }

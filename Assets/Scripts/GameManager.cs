@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
         SetScore(currentScore);
         gameRestart.Invoke();
 
+        InterruptAudioSources();
+
         if (gameAudio != null)
         {
             gameAudio.mute = false;
@@ -98,20 +100,28 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    //public void RestartButtonCallback(int input)
-    //{
-    //    Time.timeScale = 1.0f;
+    public void RestartButtonCallback(int input)
+    {
+        Time.timeScale = 1.0f;
 
-    //    isGameRestart = true;
+        isGameRestart = true;
 
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void LevelClear()
     {
 
         levelClear.Invoke();
         Time.timeScale = 0.0f;
+    }
+
+    void InterruptAudioSources()
+    {
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (AudioSource audio in allAudioSources)
+        {
+            audio.Stop();
+        }
     }
 
     void UnmuteAllAudioSources()
