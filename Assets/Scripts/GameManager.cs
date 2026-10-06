@@ -75,18 +75,6 @@ public class GameManager : MonoBehaviour
         gameOver.Invoke();
     }
 
-    public void SetScore(int score)
-    {
-        scoreChange.Invoke(score);
-    }
-
-
-    public void GameOver()
-    {
-        Time.timeScale = 0.0f;
-        gameOver.Invoke();
-    }
-
     public void StartButtonCallback(int input)
     {
         gameStart.Invoke();

@@ -189,16 +189,4 @@ public class PlayerController : MonoBehaviour
         playerHealth = 3;
         isInvulnerable = false;
     }
-
-    public void GameRestart()
-    {
-        marioBody.transform.position = new Vector3(-0.947f, -0.318f, 0.0f);
-        marioBody.transform.localScale = new Vector3(1f, 1f, 1f);
-        marioBody.linearVelocity = Vector2.zero;
-
-        faceRightState = true;
-        animator.Play("Idle");
-        playerHealth = 3;
-        isInvulnerable = false;
-    }
 }
