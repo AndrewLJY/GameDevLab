@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -19,7 +18,6 @@ public class GameManager : MonoBehaviour
     private int currentScore = 0;
     private static bool isGameRestart = false;
 
-    public AudioMixer gameMixer;
     public AudioSource gameAudio;
     public AudioClip bgMusic;
     public GameObject enemies;
@@ -121,18 +119,5 @@ public class GameManager : MonoBehaviour
 
             gameAudio.Play();
         }
-    }
-
-    public void SpeedUpBgMusic(float speedMultiplier)
-    {
-        // 1. Speed up the physical playback of the clip
-        gameAudio.pitch = speedMultiplier;
-
-        // 2. Invert the pitch shift in the mixer to keep the tone normal
-        // If speed is 1.3f, mixer pitch needs to be 1 / 1.3f = 0.77f
-        float correctedPitch = 1f / speedMultiplier;
-
-        // Ensure "MyPitchParam" is exposed in your Audio Mixer
-        gameMixer.SetFloat("MyPitchParam", correctedPitch);
     }
 }
