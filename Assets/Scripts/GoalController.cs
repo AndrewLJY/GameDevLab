@@ -35,9 +35,25 @@ public class GoalController : MonoBehaviour
     {
         if (isPlayerInside && Input.GetKeyDown(KeyCode.F))
         {
-            goalAudio.PlayOneShot(goalAudio.clip);
+            MuteAllAndPlayVictory();
             GameManager.Instance.LevelClear();
         }
     }
 
+    private void MuteAllAndPlayVictory()
+    {
+        AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+
+        foreach (AudioSource source in allAudioSources)
+        {
+            if (source != goalAudio)
+            {
+                source.mute = true;
+            }
+        }
+
+        goalAudio.mute = false;
+        goalAudio.PlayOneShot(levelCleared);
+
+    }
 }

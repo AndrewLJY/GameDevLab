@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public AudioManager AudioManager;
-
     [System.NonSerialized]
     public PlayerController playerController;
 
@@ -34,7 +32,16 @@ public class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        Time.timeScale = 0f;
+        if (isGameRestart)
+        {
+            Time.timeScale = 1.0f;
+
+            isGameRestart = false;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     void Start()
@@ -44,17 +51,27 @@ public class GameManager : MonoBehaviour
 
     public void GameRestart()
     {
-
         currentScore = 0;
         SetScore(currentScore);
         gameRestart.Invoke();
 
-        ResetBgMusic();
+        if (gameAudio != null)
+        {
+            gameAudio.mute = false;
+
+            gameAudio.Stop();
+
+            if (gameAudio.clip != null)
+            {
+                gameAudio.time = 0f;
+            }
+
+            gameAudio.Play();
+        }
 
         UnmuteAllAudioSources();
 
         Time.timeScale = 1.0f;
-
     }
 
     public void IncreaseScore(int increment)
@@ -67,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         scoreChange.Invoke(score);
     }
+
 
     public void GameOver()
     {
@@ -91,6 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelClear()
     {
+
         levelClear.Invoke();
         Time.timeScale = 0.0f;
     }
@@ -101,23 +120,6 @@ public class GameManager : MonoBehaviour
         foreach (AudioSource audio in allAudioSources)
         {
             audio.mute = false;
-        }
-    }
-
-    void ResetBgMusic()
-    {   
-        if (gameAudio != null)
-        {
-            gameAudio.mute = false;
-
-            gameAudio.Stop();
-
-            if (gameAudio.clip != null)
-            {
-                gameAudio.time = 0f;
-            }
-
-            gameAudio.Play();
         }
     }
 }

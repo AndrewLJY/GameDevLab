@@ -1822,8 +1822,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 188536548316386021, guid: 1a17b930b04968b48b9d387dfcfcdb47, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 632e293310a2b4c088dd51fdeaa9d8b8, type: 3}
-  m_PlayOnAwake: 0
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
@@ -7503,7 +7503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834b9abc40a1d0e4594ddaa03c1675ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  AudioManager: {fileID: 2056087670}
   mario: {fileID: 1163536754}
   gameAudio: {fileID: 1998984346}
   bgMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
@@ -7739,52 +7738,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8642518584463816281, guid: 99b0fb5d3e569d0408cf8892c3a22d93, type: 3}
   m_PrefabInstance: {fileID: 5611898550984759009}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2056087669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2056087671}
-  - component: {fileID: 2056087670}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2056087670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056087669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 655b99e23710ed74596f4a6449f7647f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  defaultSnapshot: {fileID: 24500006, guid: 1a17b930b04968b48b9d387dfcfcdb47, type: 2}
-  mutedSnapshot: {fileID: -131809733669915366, guid: 1a17b930b04968b48b9d387dfcfcdb47, type: 2}
---- !u!4 &2056087671
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056087669}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.30185, y: 0.03393, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2086575866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8697,6 +8650,5 @@ SceneRoots:
   - {fileID: 427299451}
   - {fileID: 491801302}
   - {fileID: 1998984344}
-  - {fileID: 2056087671}
   - {fileID: 1726688977}
   - {fileID: 969604858}
