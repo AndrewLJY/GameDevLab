@@ -7505,6 +7505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   AudioManager: {fileID: 2056087670}
   mario: {fileID: 1163536754}
+  gameMixer: {fileID: 24100000, guid: 1a17b930b04968b48b9d387dfcfcdb47, type: 2}
   gameAudio: {fileID: 1998984346}
   bgMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
   enemies: {fileID: 364453836}

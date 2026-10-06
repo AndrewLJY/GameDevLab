@@ -161,9 +161,14 @@ public class PlayerController : MonoBehaviour
 
             playerHearts.transform.GetChild(playerHealth).GetComponent<HealthManager>().PlayerTakingDmg();
 
+            if (playerHealth == 1)
+            {
+                gameManager.SpeedUpBgMusic(1.3f);
+            }
+
             if (playerHealth <= 0)
             {
-                //MuteAllAndPlayDeath();
+                gameManager.SpeedUpBgMusic(1.0f);
                 marioDeathAudio.PlayOneShot(marioDeathAudio.clip);
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
@@ -172,23 +177,6 @@ public class PlayerController : MonoBehaviour
 
         isInvulnerable = false;
     }
-
-    //private void MuteAllAndPlayDeath()
-    //{
-    //    AudioSource[] allAudioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-
-    //    foreach (AudioSource source in allAudioSources)
-    //    {
-    //        if (source != marioAudio)
-    //        {
-    //            source.mute = true;
-    //        }
-    //    }
-
-    //    marioAudio.mute = false;
-    //    marioAudio.PlayOneShot(marioDeath);
-
-    //}
 
     public void GameRestart()
     {
