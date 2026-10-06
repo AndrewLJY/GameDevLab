@@ -108,6 +108,38 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    // Keep just in case
+    //private void ResetGame()
+    //{
+    //    // reset position
+    //    mario.GetComponent<Transform>().position = new Vector3(-0.947f, -0.292f, 0.0f);
+    //    mario.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+
+    //    // reset sprite direction
+    //    playerController.faceRightState = true;
+    //    playerController.playerHealth = 3;
+
+    //    // reset Goomba
+    //    foreach (Transform enemy in enemies.transform)
+    //    {
+    //        enemy.transform.localPosition = enemy.GetComponent<EnemyController>().startPosition;
+    //        enemy.GetComponent<EnemyController>().enemyHealth = 3;
+    //    }
+
+    //    // reset score
+    //    currentScore = 0;
+    //    UpdateScoreUI();
+
+    //    foreach (Transform heart in playerHearts.transform)
+    //    {
+    //        heart.gameObject.SetActive(true);
+    //    }
+
+    //    MainGameScreen.SetActive(true);
+    //    GameOverScreen.SetActive(false);
+    //}
+
     public void LevelClear()
     {
 
