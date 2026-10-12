@@ -1,20 +1,15 @@
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
-
-    public AudioManager AudioManager;
-
     [System.NonSerialized]
     public PlayerController playerController;
-
-    public GameObject mario;
 
     private int currentScore = 0;
     private static bool isGameRestart = false;
@@ -22,8 +17,6 @@ public class GameManager : MonoBehaviour
     public AudioMixer gameMixer;
     public AudioSource gameAudio;
     public AudioClip bgMusic;
-    public GameObject enemies;
-    public GameObject playerHearts;
 
     public UnityEvent gameStart;
     public UnityEvent gameRestart;
@@ -31,17 +24,15 @@ public class GameManager : MonoBehaviour
     public UnityEvent gameOver;
     public UnityEvent levelClear;
 
-    void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-
-        Time.timeScale = 0f;
-    }
-
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "World-1-1")
+        {
+            Time.timeScale = 0f;
+        }
+
         gameAudio.PlayOneShot(bgMusic);
+        SceneManager.activeSceneChanged += SceneSetup;
     }
 
     public void GameRestart()
@@ -124,14 +115,16 @@ public class GameManager : MonoBehaviour
 
     public void SpeedUpBgMusic(float speedMultiplier)
     {
-        // 1. Speed up the physical playback of the clip
         gameAudio.pitch = speedMultiplier;
 
-        // 2. Invert the pitch shift in the mixer to keep the tone normal
-        // If speed is 1.3f, mixer pitch needs to be 1 / 1.3f = 0.77f
         float correctedPitch = 1f / speedMultiplier;
 
-        // Ensure "MyPitchParam" is exposed in your Audio Mixer
         gameMixer.SetFloat("MyPitchParam", correctedPitch);
+    }
+
+    public void SceneSetup(Scene current, Scene next)
+    {
+        gameStart.Invoke();
+        SetScore(currentScore);
     }
 }

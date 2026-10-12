@@ -255,7 +255,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_9
+      name: castle_flag
       rect:
         serializedVersion: 2
         x: 260
@@ -2521,12 +2521,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_113
+      name: castle_left
       rect:
         serializedVersion: 2
         x: 272
         y: 954
-        width: 80
+        width: 39
         height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -9186,6 +9186,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: castle_right
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 954
+        width: 41
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0655dcbed547d7f488fc7a0e650b6472
+      internalID: 1729296779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -9214,6 +9236,9 @@ TextureImporter:
       box_coin_3: 849866297
       box_coin_4: 442615376
       brick: -915299473
+      castle_flag: -1219026473
+      castle_left: 1061472222
+      castle_right: 1729296779
       coin: 1185937349
       disabled_box: 1022145759
       goomba_dead: 998783009
@@ -9234,7 +9259,6 @@ TextureImporter:
       misc-3_110: -1521334082
       misc-3_111: 139518616
       misc-3_112: 350706646
-      misc-3_113: 1061472222
       misc-3_114: 1286230510
       misc-3_115: 360270167
       misc-3_116: -1585831882
@@ -9729,7 +9753,6 @@ TextureImporter:
       misc-3_86: -484573990
       misc-3_87: 1234845367
       misc-3_89: 2117759198
-      misc-3_9: -1219026473
       misc-3_90: 907143687
       misc-3_91: -339641755
       misc-3_92: 1121919229

@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,15 +25,19 @@ public class PlayerController : MonoBehaviour
     public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
-    public AudioSource marioDeathAudio;
     public GameObject playerHearts;
     public MarioActions marioActions;
 
     GameManager gameManager;
 
+    void Awake()
+    {
+        GameManager.instance.gameRestart.AddListener(GameRestart);
+    }
+
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
 
         marioSprite = GetComponent<SpriteRenderer>();
 
@@ -169,7 +174,7 @@ public class PlayerController : MonoBehaviour
             if (playerHealth <= 0)
             {
                 gameManager.SpeedUpBgMusic(1.0f);
-                marioDeathAudio.PlayOneShot(marioDeathAudio.clip);
+                marioAudio.PlayOneShot(marioDeath);
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
             }
@@ -188,5 +193,13 @@ public class PlayerController : MonoBehaviour
         marioAnimator.Play("Idle");
         playerHealth = 3;
         isInvulnerable = false;
+    }
+    public void SetStartingPosition(Scene current, Scene next)
+    {
+        if (next.name == "World-1-2")
+        {
+            // change the position accordingly in your World-1-2 case
+            this.transform.position = new Vector3(-1.947f, -0.318f, 0.0f);
+        }
     }
 }
