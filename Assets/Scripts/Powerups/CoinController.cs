@@ -25,16 +25,12 @@ public class CoinController : MonoBehaviour
     public void SpawnCoin()
     {
         animator.SetTrigger("spawnCoin");
-        coinAudio.PlayOneShot(coinAudio.clip);
+        if(!coinAudio.isPlaying) coinAudio.PlayOneShot(coinAudio.clip);
     }
 
     public void CoinTaken()
     {
         gameObject.SetActive(false);
-        if (box.name == "Question-Box")
-        {
-            box.GetComponent<BoxContainerController>().DisableBox();
-        }
     }
 
     public void TriggerIntEvent()

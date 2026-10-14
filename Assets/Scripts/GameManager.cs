@@ -81,15 +81,6 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1.0f;
     }
 
-    //public void RestartButtonCallback(int input)
-    //{
-    //    Time.timeScale = 1.0f;
-
-    //    isGameRestart = true;
-
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
-
     public void LevelClear()
     {
         levelClear.Invoke();
