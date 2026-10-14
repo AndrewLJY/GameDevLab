@@ -14,9 +14,9 @@ public class ObstaclesManager : MonoBehaviour
         {
             foreach (Transform child in boxContainer)
             {
-                if (child.name == "Question-Box" || child.name == "Brick")
+                if (child.name.Contains("Question-Box") || child.name.Contains("Brick"))
                 {
-                    child.GetComponent<BoxController>().GameRestart();
+                    child.GetComponent<BoxContainerController>().GameRestart();
                 }
                 else
                 {

@@ -65,6 +65,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "pause",
+                    "type": "Button",
+                    "id": "0364c564-155d-4221-88b7-08c86aa113bf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -175,6 +185,17 @@
                     "processors": "",
                     "groups": ";SuperMarioBros",
                     "action": "attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e0f9648-fd51-49da-9507-d5f37ed662fa",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";SuperMarioBros",
+                    "action": "pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

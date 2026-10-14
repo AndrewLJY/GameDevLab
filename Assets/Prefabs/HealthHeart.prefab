@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfb4e20f6920884f986c95356b2f137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
-  healthAnimator: {fileID: 0}
+  heartAnimator: {fileID: -6412562419210600104}
 --- !u!95 &-6412562419210600104
 Animator:
   serializedVersion: 7

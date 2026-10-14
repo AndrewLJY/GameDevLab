@@ -23,6 +23,7 @@ public class HUDManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject mainMenuPanel;
     public GameObject levelClearPanel;
+    public GameObject pauseMenuPanel;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class HUDManager : MonoBehaviour
         GameManager.instance.gameRestart.AddListener(GameStart);
         GameManager.instance.scoreChange.AddListener(SetScore);
         GameManager.instance.levelClear.AddListener(LevelClear);
+        GameManager.instance.gamePaused.AddListener(PauseGame);
     }
 
     void Start()
@@ -44,10 +46,11 @@ public class HUDManager : MonoBehaviour
 
     public void GameStart()
     {
-        // hide gameover panel
         gameOverPanel.SetActive(false);
         mainMenuPanel.SetActive(false);
         levelClearPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+
         mainGamePanel.SetActive(true);
         scoreText.SetActive(true);
         restartButton.SetActive(true);
@@ -61,6 +64,8 @@ public class HUDManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         mainMenuPanel.SetActive(false);
         levelClearPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+
         mainGamePanel.SetActive(true);
         scoreText.SetActive(true);
         restartButton.SetActive(true);
@@ -89,5 +94,22 @@ public class HUDManager : MonoBehaviour
         levelClearPanel.SetActive(true);
         scoreText.transform.localPosition = scoreTextPosition[2];
         restartButton.transform.localPosition = restartButtonPosition[2];
+    }
+
+    public void PauseGame()
+    {
+        if (!(mainMenuPanel.activeSelf || gameOverPanel.activeSelf || levelClearPanel.activeSelf))
+        {
+            if (Time.timeScale == 0.0f)
+            {
+                Time.timeScale = 1.0f;
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+            }
+
+            pauseMenuPanel.SetActive(!pauseMenuPanel.activeSelf);
+        }
     }
 }

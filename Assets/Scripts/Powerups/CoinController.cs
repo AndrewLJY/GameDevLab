@@ -33,7 +33,7 @@ public class CoinController : MonoBehaviour
         gameObject.SetActive(false);
         if (box.name == "Question-Box")
         {
-            box.GetComponent<BoxController>().DisableBox();
+            box.GetComponent<BoxContainerController>().DisableBox();
         }
     }
 

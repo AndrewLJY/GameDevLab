@@ -9,6 +9,7 @@ public class ActionManager : MonoBehaviour
     public UnityEvent jumpHold;
     public UnityEvent<int> moveCheck;
     public UnityEvent attack;
+    public UnityEvent pause;
 
     public void OnJumpHoldAction(InputAction.CallbackContext context)
     {
@@ -77,6 +78,14 @@ public class ActionManager : MonoBehaviour
         if (context.performed)
         {
             attack.Invoke();
+        }
+    }
+
+    public void OnPauseAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            pause.Invoke();
         }
     }
 }

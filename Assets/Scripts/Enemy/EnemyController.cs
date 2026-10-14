@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
 
         enemyBody = GetComponent<Rigidbody2D>();
         enemyAnimator = GetComponent<Animator>();

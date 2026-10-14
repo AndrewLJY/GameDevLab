@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour
 {
     void Awake()
     {
@@ -11,7 +11,6 @@ public class PlayerHealthManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Debug.Log("player heart");
             child.gameObject.SetActive(true);
         }
     }

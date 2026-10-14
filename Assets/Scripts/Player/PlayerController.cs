@@ -13,18 +13,20 @@ public class PlayerController : MonoBehaviour
 
     [System.NonSerialized] public bool faceRightState = true;
     [System.NonSerialized] public int playerHealth = 3;
-    public float speed = 7;
-    public float maxSpeed = 15;
-    public float upSpeed = 5;
+
+    public GameConstants gameConstants;
+    float speed;
+    float maxSpeed;
+    float upSpeed;
     private bool onGroundState = true;
     private bool isMoving = false;
     private bool jumpedState = false;
 
-    private SpriteRenderer marioSprite;
     private Rigidbody2D marioBody;
     public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
+    public AudioSource marioDeathAudio;
     public GameObject playerHearts;
     public MarioActions marioActions;
 
@@ -39,7 +41,11 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = GameManager.instance;
 
-        marioSprite = GetComponent<SpriteRenderer>();
+        SetStartingPosition();
+
+        speed = gameConstants.speed;
+        maxSpeed = gameConstants.maxSpeed;
+        upSpeed = gameConstants.upSpeed;
 
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
@@ -164,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
             playerHealth -= 1;
 
-            playerHearts.transform.GetChild(playerHealth).GetComponent<HealthManager>().PlayerTakingDmg();
+            playerHearts.transform.GetChild(playerHealth).GetComponent<HeartManager>().PlayerTakingDmg();
 
             if (playerHealth == 1)
             {
@@ -174,7 +180,7 @@ public class PlayerController : MonoBehaviour
             if (playerHealth <= 0)
             {
                 gameManager.SpeedUpBgMusic(1.0f);
-                marioAudio.PlayOneShot(marioDeath);
+                marioDeathAudio.PlayOneShot(marioDeath);
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
             }
@@ -185,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     public void GameRestart()
     {
-        marioBody.transform.position = new Vector3(-0.947f, -0.318f, 0.0f);
+        SetStartingPosition();
         marioBody.transform.localScale = new Vector3(1f, 1f, 1f);
         marioBody.linearVelocity = Vector2.zero;
 
@@ -194,12 +200,22 @@ public class PlayerController : MonoBehaviour
         playerHealth = 3;
         isInvulnerable = false;
     }
-    public void SetStartingPosition(Scene current, Scene next)
+
+    public void SetStartingPosition()
     {
-        if (next.name == "World-1-2")
+        Scene current = SceneManager.GetActiveScene();
+        if (current.name == "World-1-2")
         {
             // change the position accordingly in your World-1-2 case
             this.transform.position = new Vector3(-1.947f, -0.318f, 0.0f);
+        }else
+        {
+            this.transform.position = gameConstants.marioStartingPosition;
         }
+    }
+
+    public void PauseGame()
+    {
+        gameManager.PauseGame();
     }
 }

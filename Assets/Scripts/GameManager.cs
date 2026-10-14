@@ -11,8 +11,9 @@ public class GameManager : Singleton<GameManager>
     [System.NonSerialized]
     public PlayerController playerController;
 
-    private int currentScore = 0;
-    private static bool isGameRestart = false;
+    //private int currentScore = 0;
+    public IntVariable gameScore;
+    //private static bool isGameRestart = false;
 
     public AudioMixer gameMixer;
     public AudioSource gameAudio;
@@ -23,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     public UnityEvent<int> scoreChange;
     public UnityEvent gameOver;
     public UnityEvent levelClear;
+    public UnityEvent gamePaused;
 
     void Start()
     {
@@ -31,14 +33,13 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = 0f;
         }
 
-        gameAudio.PlayOneShot(bgMusic);
         SceneManager.activeSceneChanged += SceneSetup;
     }
 
     public void GameRestart()
     {
-        currentScore = 0;
-        SetScore(currentScore);
+        gameScore.Value = 0;
+        SetScore(gameScore.Value);
         gameRestart.Invoke();
 
         ResetBgMusic();
@@ -51,8 +52,8 @@ public class GameManager : Singleton<GameManager>
 
     public void IncreaseScore(int increment)
     {
-        currentScore += increment;
-        SetScore(currentScore);
+        gameScore.ApplyChange(increment);
+        SetScore(gameScore.Value);
     }
 
     public void SetScore(int score)
@@ -64,6 +65,14 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 0.0f;
         gameOver.Invoke();
+    }
+
+    public void PauseGame()
+    {
+        gamePaused.Invoke();
+
+        if (gameAudio.isPlaying) gameAudio.Pause();
+        else gameAudio.Play();
     }
 
     public void StartButtonCallback(int input)
@@ -125,6 +134,6 @@ public class GameManager : Singleton<GameManager>
     public void SceneSetup(Scene current, Scene next)
     {
         gameStart.Invoke();
-        SetScore(currentScore);
+        SetScore(gameScore.Value);
     }
 }
