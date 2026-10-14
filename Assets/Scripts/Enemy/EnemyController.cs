@@ -10,18 +10,19 @@ public class EnemyController : MonoBehaviour
     [System.NonSerialized] public Vector3 startPosition;
 
     private float originalX;
-    private float moveSpeed = 0.5f;
     private float knockbackTimer = 0f;
     private Rigidbody2D enemyBody;
     private Transform playerTransform;
     private bool isDead = false;
 
-    public int enemyHealth = 3;
+    public GameConstants gameConstants;
 
     GameManager gameManager;
 
     void Awake()
     {
+        enemyBody = GetComponent<Rigidbody2D>();
+        enemyAnimator = GetComponent<Animator>();
         startPosition = transform.localPosition;
     }
 
@@ -29,8 +30,6 @@ public class EnemyController : MonoBehaviour
     {
         gameManager = GameManager.instance;
 
-        enemyBody = GetComponent<Rigidbody2D>();
-        enemyAnimator = GetComponent<Animator>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -54,15 +53,14 @@ public class EnemyController : MonoBehaviour
         if (!isInvulnerable && !isDead)
         {
             enemyAnimator.SetTrigger("onHit");
-            enemyHealth -= 1;
-            Debug.Log("Enemy hit! Current health: " + enemyHealth);
+            gameConstants.enemyHealth -= gameConstants.weaponDmg;
 
             Vector2 heading = transform.position - other.transform.position;
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
 
             ApplyKnockback(knockbackDirection, knockbackForce);
 
-            if (enemyHealth <= 0)
+            if (gameConstants.enemyHealth <= 0)
             {
                 enemyAnimator.SetTrigger("onDead");
                 isDead = true;
@@ -95,7 +93,7 @@ public class EnemyController : MonoBehaviour
         {
             float directionToPlayer = Mathf.Sign(playerTransform.position.x - transform.position.x);
 
-            enemyBody.linearVelocity = new Vector2(directionToPlayer * moveSpeed, enemyBody.linearVelocity.y);
+            enemyBody.linearVelocity = new Vector2(directionToPlayer * gameConstants.enemyMoveSpeed, enemyBody.linearVelocity.y);
 
             if (directionToPlayer > 0)
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -116,12 +114,11 @@ public class EnemyController : MonoBehaviour
     public void GameRestart()
     {
         gameObject.SetActive(true);
-        //enemyAnimator.SetTrigger("gameRestart");
 
         transform.localPosition = startPosition;
         originalX = transform.position.x;
 
-        enemyHealth = 3;
+        gameConstants.enemyHealth = 3;
         isDead = false;
         isInvulnerable = false;
         knockbackTimer = 0f;

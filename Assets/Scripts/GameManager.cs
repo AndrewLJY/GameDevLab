@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
 
     public AudioMixer gameMixer;
     public AudioSource gameAudio;
-    public AudioClip bgMusic;
 
     public UnityEvent gameStart;
     public UnityEvent gameRestart;
@@ -26,20 +25,23 @@ public class GameManager : Singleton<GameManager>
     public UnityEvent levelClear;
     public UnityEvent gamePaused;
 
+    public GameConstants gameConstants;
+
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "World-1-1")
-        {
-            Time.timeScale = 0f;
-        }
-
         SceneManager.activeSceneChanged += SceneSetup;
+        gameScore.ResetValue();
+        GameRestart();
     }
 
     public void GameRestart()
     {
-        gameScore.Value = 0;
+        if(SceneManager.GetActiveScene().name == "World-1-1") gameScore.ResetValue();
+
+        gameConstants.ResetToDefaults();
+
         SetScore(gameScore.Value);
+
         gameRestart.Invoke();
 
         ResetBgMusic();
@@ -53,6 +55,7 @@ public class GameManager : Singleton<GameManager>
     public void IncreaseScore(int increment)
     {
         gameScore.ApplyChange(increment);
+
         SetScore(gameScore.Value);
     }
 
@@ -73,12 +76,6 @@ public class GameManager : Singleton<GameManager>
 
         if (gameAudio.isPlaying) gameAudio.Pause();
         else gameAudio.Play();
-    }
-
-    public void StartButtonCallback(int input)
-    {
-        gameStart.Invoke();
-        Time.timeScale = 1.0f;
     }
 
     public void LevelClear()

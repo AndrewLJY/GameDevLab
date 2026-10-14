@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1154276325
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -981242194, guid: 82bc45c4496284f4c823d1b837f65ec4, type: 3}
@@ -129,15 +129,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   coinAudio: {fileID: 5166864550609136611}
-  box: {fileID: 0}
-  parameter: 0
+  parameter: 1
   useInt:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 

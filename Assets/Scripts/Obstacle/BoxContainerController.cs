@@ -11,7 +11,7 @@ public class BoxContainerController : MonoBehaviour
 
     void Start()
     {
-        isQuestionBox = gameObject.transform.GetChild(0).name == "Question-Box";
+        isQuestionBox = gameObject.transform.GetChild(0).name.Contains("Question-Box");
 
         boxAnimator = transform.GetComponent<Animator>();
     
@@ -32,6 +32,7 @@ public class BoxContainerController : MonoBehaviour
 
     public void GameRestart()
     {
+        Debug.Log(gameObject.name + " isQuestionBox: " + isQuestionBox);
         if (isQuestionBox) boxAnimator.SetBool("boxDisabled", false);
     }
 }

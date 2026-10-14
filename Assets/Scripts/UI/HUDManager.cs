@@ -21,7 +21,6 @@ public class HUDManager : MonoBehaviour
 
     public GameObject mainGamePanel;
     public GameObject gameOverPanel;
-    public GameObject mainMenuPanel;
     public GameObject levelClearPanel;
     public GameObject pauseMenuPanel;
 
@@ -47,7 +46,6 @@ public class HUDManager : MonoBehaviour
     public void GameStart()
     {
         gameOverPanel.SetActive(false);
-        mainMenuPanel.SetActive(false);
         levelClearPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
 
@@ -62,7 +60,6 @@ public class HUDManager : MonoBehaviour
     public void GameRestart()
     {
         gameOverPanel.SetActive(false);
-        mainMenuPanel.SetActive(false);
         levelClearPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
 
@@ -76,7 +73,6 @@ public class HUDManager : MonoBehaviour
 
     public void SetScore(int score)
     {
-        Debug.Log("increasing score");
         scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString();
     }
 
@@ -98,7 +94,7 @@ public class HUDManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (!(mainMenuPanel.activeSelf || gameOverPanel.activeSelf || levelClearPanel.activeSelf))
+        if (!(gameOverPanel.activeSelf || levelClearPanel.activeSelf))
         {
             if (Time.timeScale == 0.0f)
             {

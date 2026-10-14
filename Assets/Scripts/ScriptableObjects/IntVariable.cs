@@ -33,4 +33,8 @@ public class IntVariable : Variable<int>
         previousHighestValue = 0;
     }
 
+    public void ResetValue()
+    {
+        _value = 0;
+    }
 }

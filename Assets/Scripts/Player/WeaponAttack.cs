@@ -8,7 +8,7 @@ public class WeaponAttack : MonoBehaviour
     public AudioSource weaponAudio;
     public AudioClip weaponSwing;
 
-    private float knockbackForce = 2f;
+    public GameConstants gameConstants;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class WeaponAttack : MonoBehaviour
             {
                 weaponAudio.PlayOneShot(weaponSwing);
             }
-            other.GetComponent<EnemyController>().TakeDamage(gameObject.GetComponent<Collider2D>(), knockbackForce);
+            other.GetComponent<EnemyController>().TakeDamage(gameObject.GetComponent<Collider2D>(), gameConstants.weaponKnockbackForce);
 
         }
 

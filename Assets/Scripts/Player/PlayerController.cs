@@ -12,18 +12,16 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized] public bool isInvulnerable = false;
 
     [System.NonSerialized] public bool faceRightState = true;
-    [System.NonSerialized] public int playerHealth = 3;
+    //[System.NonSerialized] public int gameConstants.health = 3;
 
     public GameConstants gameConstants;
-    float speed;
-    float maxSpeed;
-    float upSpeed;
+
     private bool onGroundState = true;
     private bool isMoving = false;
     private bool jumpedState = false;
 
     private Rigidbody2D marioBody;
-    public AudioClip marioDeath;
+    //public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
     public AudioSource marioDeathAudio;
@@ -32,9 +30,12 @@ public class PlayerController : MonoBehaviour
 
     GameManager gameManager;
 
+
     void Awake()
     {
         GameManager.instance.gameRestart.AddListener(GameRestart);
+        marioBody = GetComponent<Rigidbody2D>();
+        marioAnimator = GetComponent<Animator>();
     }
 
     void Start()
@@ -43,13 +44,7 @@ public class PlayerController : MonoBehaviour
 
         SetStartingPosition();
 
-        speed = gameConstants.speed;
-        maxSpeed = gameConstants.maxSpeed;
-        upSpeed = gameConstants.upSpeed;
-
         Application.targetFrameRate = 30;
-        marioBody = GetComponent<Rigidbody2D>();
-        marioAnimator = GetComponent<Animator>();
 
     }
 
@@ -59,11 +54,11 @@ public class PlayerController : MonoBehaviour
 
     void Move(int value)
     {
-
         Vector2 movement = new Vector2(value, 0);
         marioAnimator.SetBool("isWalking", isMoving);
-        if (marioBody.linearVelocity.magnitude < maxSpeed)
-            marioBody.AddForce(movement * speed);
+        if (marioBody.linearVelocity.magnitude < gameConstants.maxSpeed)
+
+            marioBody.AddForce(movement * gameConstants.speed);
     }
 
     public void MoveCheck(int value)
@@ -86,9 +81,9 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (playerHealth > 0 && onGroundState)
+        if (gameConstants.health > 0 && onGroundState)
         {
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+            marioBody.AddForce(Vector2.up * gameConstants.upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
             jumpedState = true;
             marioAudio.PlayOneShot(marioAudio.clip);
@@ -99,9 +94,9 @@ public class PlayerController : MonoBehaviour
 
     public void JumpHold()
     {
-        if (playerHealth > 0 && jumpedState)
+        if (gameConstants.health > 0 && jumpedState)
         {
-            marioBody.AddForce(Vector2.up * upSpeed * 30, ForceMode2D.Force);
+            marioBody.AddForce(Vector2.up * gameConstants.upSpeed * 30, ForceMode2D.Force);
             jumpedState = false;
 
         }
@@ -141,7 +136,7 @@ public class PlayerController : MonoBehaviour
         if (!isInvulnerable)
         {
             
-            if (playerHealth > 0 && isMoving)
+            if (gameConstants.health > 0 && isMoving)
             {
                 Move(faceRightState == true ? 1 : -1);
             }
@@ -153,7 +148,7 @@ public class PlayerController : MonoBehaviour
     {
         isInvulnerable = true;
         marioBody.linearVelocity = Vector2.zero;
-        marioBody.AddForce(direction * 4f, ForceMode2D.Impulse);
+        marioBody.AddForce(direction * gameConstants.enemyKnockbackForce, ForceMode2D.Impulse);
     }
 
     public void TakeDamage(Collider2D other)
@@ -168,19 +163,19 @@ public class PlayerController : MonoBehaviour
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
             ApplyKnockback(knockbackDirection);
 
-            playerHealth -= 1;
+            gameConstants.health -= 1;
 
-            playerHearts.transform.GetChild(playerHealth).GetComponent<HeartManager>().PlayerTakingDmg();
+            playerHearts.transform.GetChild(gameConstants.health).GetComponent<HeartManager>().PlayerTakingDmg();
 
-            if (playerHealth == 1)
+            if (gameConstants.health == 1)
             {
                 gameManager.SpeedUpBgMusic(1.3f);
             }
 
-            if (playerHealth <= 0)
+            if (gameConstants.health <= 0)
             {
                 gameManager.SpeedUpBgMusic(1.0f);
-                marioDeathAudio.PlayOneShot(marioDeath);
+                marioAudio.PlayOneShot(gameConstants.deathMusic);
                 Time.timeScale = 0.0f;
                 gameManager.GameOver();
             }
@@ -192,23 +187,26 @@ public class PlayerController : MonoBehaviour
     public void GameRestart()
     {
         SetStartingPosition();
+
         marioBody.transform.localScale = new Vector3(1f, 1f, 1f);
         marioBody.linearVelocity = Vector2.zero;
 
         faceRightState = true;
         marioAnimator.Play("Idle");
-        playerHealth = 3;
+        gameConstants.health = 3;
         isInvulnerable = false;
     }
 
     public void SetStartingPosition()
     {
         Scene current = SceneManager.GetActiveScene();
+
         if (current.name == "World-1-2")
         {
-            // change the position accordingly in your World-1-2 case
             this.transform.position = new Vector3(-1.947f, -0.318f, 0.0f);
-        }else
+            gameConstants.health = 3;
+        }
+        else
         {
             this.transform.position = gameConstants.marioStartingPosition;
         }

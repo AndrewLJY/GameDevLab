@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598a608ee1f25274ab8f428ded603b56, type: 3}
+  m_Name: SMB
+  m_EditorClassIdentifier: Assembly-CSharp::GameConstants
+  defaultSpeed: 1
+  defaultMaxSpeed: 1
+  defaultUpSpeed: 0.1
+  defaultMarioPosition: {x: -0.947, y: -0.318, z: 0}
+  defaultHealth: 3
+  defaultWeaponDmg: 1
+  defaultWeaponKnockbackForce: 2
+  defaultEnemyHealth: 3
+  defaultEnemyMoveSpeed: 0.5
+  defaultEnemyKnockbackForce: 0.1
+  defaultPowerupScoreValue: 10
+  defaultPowerupSpeedMultiplier: 0.01
+  speed: 1
+  maxSpeed: 1
+  upSpeed: 0.1
+  marioStartingPosition: {x: -0.947, y: -0.318, z: 0}
+  health: 3
+  weaponDmg: 1
+  weaponKnockbackForce: 2
+  enemyHealth: 3
+  enemyMoveSpeed: 0.5
+  enemyKnockbackForce: 0.1
+  powerupScoreValue: 10
+  powerupSpeedMultiplier: 0.01
+  bgMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
+  deathMusic: {fileID: 8300000, guid: 90ceef20da9a84d9891da3179ede4177, type: 3}

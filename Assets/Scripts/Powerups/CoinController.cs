@@ -5,16 +5,15 @@ using UnityEngine.Events;
 
 public class CoinController : MonoBehaviour
 {
-    private Animator animator;
+    private Animator coinAnimator;
     public AudioSource coinAudio;
-    public GameObject box;
 
     public int parameter;
     public UnityEvent<int> useInt;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        coinAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,7 +23,7 @@ public class CoinController : MonoBehaviour
 
     public void SpawnCoin()
     {
-        animator.SetTrigger("spawnCoin");
+        coinAnimator.SetTrigger("spawnCoin");
         if(!coinAudio.isPlaying) coinAudio.PlayOneShot(coinAudio.clip);
     }
 
@@ -35,7 +34,6 @@ public class CoinController : MonoBehaviour
 
     public void TriggerIntEvent()
     {
-        Debug.Log("trigger int event");
         useInt.Invoke(parameter);
     }
 

@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            Debug.Log("restting hearts");
             child.gameObject.SetActive(true);
         }
     }

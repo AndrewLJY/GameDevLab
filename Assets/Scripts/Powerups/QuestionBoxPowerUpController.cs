@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestionBoxPowerupController : MonoBehaviour, IPowerupController
+public class QuestionBoxPowerUpController : MonoBehaviour, IPowerupController
 {
     public Animator powerupAnimator;
     public BasePowerup powerup; // reference to this question box's powerup
@@ -24,7 +24,7 @@ public class QuestionBoxPowerupController : MonoBehaviour, IPowerupController
         if (other.gameObject.tag == "Player" && !powerup.hasSpawned)
         {
             // show disabled sprite
-            this.GetComponent<Animator>().SetTrigger("spawned");
+            this.transform.parent.GetComponent<Animator>().SetTrigger("spawned");
             // spawn the powerup
             powerupAnimator.SetTrigger("spawned");
         }
@@ -33,7 +33,7 @@ public class QuestionBoxPowerupController : MonoBehaviour, IPowerupController
     // used by animator
     public void Disable()
     {
-        this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        this.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         transform.localPosition = new Vector3(0, 0, 0);
     }
 

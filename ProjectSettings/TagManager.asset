@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Obstacles
   - Manager
+  - Powerups
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Enemy
   - Obstacles
   - Interactive
-  - 
-  - 
+  - Powerups
+  - Pipes
   - 
   - 
   - 
@@ -46,8 +47,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 132457409
+    locked: 0
+  - name: Enemy
+    uniqueID: 4153965577
+    locked: 0
+  - name: Powerups
+    uniqueID: 3140690971
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3078465011
+    locked: 0
   - name: Castle
     uniqueID: 437889865
+    locked: 0
+  - name: Background
+    uniqueID: 795427155
     locked: 0
   m_RenderingLayers:
   - Default

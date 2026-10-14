@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,19 +12,26 @@ public class ObstaclesManager : MonoBehaviour
 
     public void ResetObstacles()
     {
-        foreach (Transform boxContainer in transform)
+        GameObject[] BoxObstacles = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None)
+                                     .Where(obj => obj.name.Contains("Question-Box") || obj.name.Contains("Brick"))
+                                     .ToArray();
+
+        GameObject[] Coins = Resources.FindObjectsOfTypeAll<GameObject>()
+                                     .Where(obj => obj.name == "Coin" && obj.hideFlags == HideFlags.None)
+                                     .ToArray();
+
+        foreach (GameObject child in BoxObstacles)
         {
-            foreach (Transform child in boxContainer)
-            {
-                if (child.name.Contains("Question-Box") || child.name.Contains("Brick"))
-                {
-                    child.GetComponent<BoxContainerController>().GameRestart();
-                }
-                else
-                {
-                    child.GetComponent<CoinController>().GameRestart();
-                }
+            if(child.transform.GetComponent<BoxContainerController>() != null)
+            { 
+                child.transform.GetComponent<BoxContainerController>().GameRestart(); 
             }
         }
+
+        foreach (GameObject child in Coins)
+        {
+            child.GetComponent<CoinController>().GameRestart();
+        }
+        
     }
 }

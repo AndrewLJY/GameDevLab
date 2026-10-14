@@ -227,10 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc97e68fb3632f4697475d3a58ef933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  animator: {fileID: 0}
-  enemyHealth: 3
-  isInvulnerable: 0
-  startPosition: {x: 0, y: 0, z: 0}
+  gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
 --- !u!95 &8906752515818806490
 Animator:
   serializedVersion: 7

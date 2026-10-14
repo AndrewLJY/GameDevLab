@@ -1135,6 +1135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttack
   weaponAudio: {fileID: 436203190}
   weaponSwing: {fileID: 8300000, guid: 7016dd03d29e64aa18bc6f1ae5bd8bec, type: 3}
+  gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
 --- !u!82 &436203190
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2014,7 +2015,6 @@ MonoBehaviour:
   restartButton: {fileID: 950498494}
   mainGamePanel: {fileID: 1484264683}
   gameOverPanel: {fileID: 267787524}
-  mainMenuPanel: {fileID: 2081735497}
   levelClearPanel: {fileID: 1121625318}
   pauseMenuPanel: {fileID: 1812422470}
 --- !u!114 &870095742
@@ -3112,7 +3112,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.021981841
   m_LinearDamping: 3
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -5291,7 +5291,6 @@ MonoBehaviour:
   gameScore: {fileID: 11400000, guid: fb4df29d661a4724289a2884827620bc, type: 2}
   gameMixer: {fileID: 24100000, guid: 1a17b930b04968b48b9d387dfcfcdb47, type: 2}
   gameAudio: {fileID: 1670683998}
-  bgMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
   gameStart:
     m_PersistentCalls:
       m_Calls: []
@@ -5310,6 +5309,7 @@ MonoBehaviour:
   gamePaused:
     m_PersistentCalls:
       m_Calls: []
+  gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
 --- !u!4 &1670684000
 Transform:
   m_ObjectHideFlags: 0
@@ -5560,8 +5560,8 @@ Camera:
   m_GameObject: {fileID: 1713246102}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.43529412, g: 0.35686275, b: 0.8666667, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
