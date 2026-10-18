@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using static IPowerup;
 
 public class MagicMushroomPowerup : BasePowerup
@@ -16,16 +17,18 @@ public class MagicMushroomPowerup : BasePowerup
 
     public GameConstants gameConstants;
 
+    public int scoreValue = 10;
+
     GameManager gameManager;
+
+    public UnityEvent<int> increaseScore;
 
     void Awake()
     {
-        GameManager.instance.gameRestart.AddListener(GameRestart);
     }
 
     protected override void Start()
     {
-        gameManager = GameManager.instance;
         initialPowerupColliderPosition = transform.localPosition;
         initialPowerupPosition = transform.GetChild(0).transform.localPosition;
 
@@ -39,7 +42,7 @@ public class MagicMushroomPowerup : BasePowerup
         if (col.gameObject.CompareTag("Player") && spawned)
         {
 
-            gameManager.IncreaseScore(gameConstants.powerupScoreValue);
+            increaseScore.Invoke(scoreValue);
 
             gameObject.SetActive(false);
 
@@ -58,7 +61,6 @@ public class MagicMushroomPowerup : BasePowerup
     // interface implementation
     public async override void SpawnPowerup()
     {
-
         powerupAudioSource.PlayOneShot(powerupAudioSource.clip);
 
         powerupCollider.enabled = true;
@@ -80,7 +82,8 @@ public class MagicMushroomPowerup : BasePowerup
     public void GameRestart()
     {
         if (powerupCollider != null && rigidBody != null)
-        {   
+        {
+            gameObject.SetActive(false);
             powerupCollider.enabled = false;
             rigidBody.bodyType = RigidbodyType2D.Static;
             spawned = false;

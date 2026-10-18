@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -30,17 +31,19 @@ public class PlayerController : MonoBehaviour
 
     GameManager gameManager;
 
+    public UnityEvent gameOver;
+
 
     void Awake()
     {
-        GameManager.instance.gameRestart.AddListener(GameRestart);
+        //GameManager.instance.gameRestart.AddListener(GameRestart);
         marioBody = GetComponent<Rigidbody2D>();
         marioAnimator = GetComponent<Animator>();
     }
 
     void Start()
     {
-        gameManager = GameManager.instance;
+        //gameManager = GameManager.instance;
 
         SetStartingPosition();
 
@@ -169,15 +172,15 @@ public class PlayerController : MonoBehaviour
 
             if (gameConstants.health == 1)
             {
-                gameManager.SpeedUpBgMusic(1.3f);
+                //gameManager.SpeedUpBgMusic(1.3f);
             }
 
             if (gameConstants.health <= 0)
             {
-                gameManager.SpeedUpBgMusic(1.0f);
+                //gameManager.SpeedUpBgMusic(1.0f);
                 marioAudio.PlayOneShot(gameConstants.deathMusic);
                 Time.timeScale = 0.0f;
-                gameManager.GameOver();
+                gameOver.Invoke();
             }
         }
 

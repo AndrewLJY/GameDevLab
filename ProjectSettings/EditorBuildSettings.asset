@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/World-1-1.unity
+    path: Assets/Scenes/Lab4_SingletonFormat/World-1-1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/World-1-2.unity
+    path: Assets/Scenes/Lab4_SingletonFormat/World-1-2.unity
     guid: c3c7b7686b1f1f343aaa9e81432e304e
   - enabled: 1
-    path: Assets/Scenes/MainMenuScene.unity
+    path: Assets/Scenes/Lab4_SingletonFormat/MainMenuScene.unity
     guid: 7c891b2aae768fa4ab0e805513292dba
   - enabled: 1
-    path: Assets/Scenes/LoadingScene.unity
+    path: Assets/Scenes/Lab4_SingletonFormat/LoadingScene.unity
     guid: 8b1126bbf8c252643ae8e578d4af1ca0
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

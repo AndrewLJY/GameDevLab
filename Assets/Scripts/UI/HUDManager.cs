@@ -18,20 +18,23 @@ public class HUDManager : MonoBehaviour
 
     public GameObject scoreText;
     public GameObject restartButton;
+    public IntVariable gameScore;
 
     public GameObject mainGamePanel;
     public GameObject gameOverPanel;
     public GameObject levelClearPanel;
     public GameObject pauseMenuPanel;
 
+    [SerializeField] private HealthManager healthManagerScript;
+
     void Awake()
     {
-        GameManager.instance.gameStart.AddListener(GameStart);
-        GameManager.instance.gameOver.AddListener(GameOver);
-        GameManager.instance.gameRestart.AddListener(GameStart);
-        GameManager.instance.scoreChange.AddListener(SetScore);
-        GameManager.instance.levelClear.AddListener(LevelClear);
-        GameManager.instance.gamePaused.AddListener(PauseGame);
+        //GameManager.instance.gameStart.AddListener(GameStart);
+        //GameManager.instance.gameOver.AddListener(GameOver);
+        //GameManager.instance.gameRestart.AddListener(GameStart);
+        //GameManager.instance.scoreChange.AddListener(SetScore);
+        //GameManager.instance.levelClear.AddListener(LevelClear);
+        //GameManager.instance.gamePaused.AddListener(PauseGame);
     }
 
     void Start()
@@ -67,13 +70,15 @@ public class HUDManager : MonoBehaviour
         scoreText.SetActive(true);
         restartButton.SetActive(true);
 
+        healthManagerScript.ResetPlayerHearts();
+
         scoreText.transform.localPosition = scoreTextPosition[0];
         restartButton.transform.localPosition = restartButtonPosition[0];
     }
 
-    public void SetScore(int score)
+    public void UpdateScoreUI()
     {
-        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString();
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + gameScore.Value.ToString();
     }
 
 

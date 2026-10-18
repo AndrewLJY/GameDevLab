@@ -7,7 +7,7 @@ public class ObstaclesManager : MonoBehaviour
 {
     void Awake()
     {
-        GameManager.instance.gameRestart.AddListener(ResetObstacles);
+        //GameManager.instance.gameRestart.AddListener(ResetObstacles);
     }
 
     public void ResetObstacles()

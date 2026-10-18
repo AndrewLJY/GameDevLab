@@ -8,8 +8,8 @@ public class CoinController : MonoBehaviour
     private Animator coinAnimator;
     public AudioSource coinAudio;
 
-    public int parameter;
-    public UnityEvent<int> useInt;
+    public int scoreValue = 1;
+    public UnityEvent<int> increaseScore;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class CoinController : MonoBehaviour
 
     public void TriggerIntEvent()
     {
-        useInt.Invoke(parameter);
+        increaseScore.Invoke(scoreValue);
     }
 
     public void GameRestart()

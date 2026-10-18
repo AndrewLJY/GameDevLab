@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
@@ -15,7 +16,11 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isDead = false;
 
+    public int enemyHealth = 3;
+
     public GameConstants gameConstants;
+
+    public UnityEvent<int> increaseScore;
 
     GameManager gameManager;
 
@@ -28,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.instance;
+        //gameManager = GameManager.instance;
 
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -53,14 +58,14 @@ public class EnemyController : MonoBehaviour
         if (!isInvulnerable && !isDead)
         {
             enemyAnimator.SetTrigger("onHit");
-            gameConstants.enemyHealth -= gameConstants.weaponDmg;
+            enemyHealth -= gameConstants.weaponDmg;
 
             Vector2 heading = transform.position - other.transform.position;
             Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
 
             ApplyKnockback(knockbackDirection, knockbackForce);
 
-            if (gameConstants.enemyHealth <= 0)
+            if (enemyHealth <= 0)
             {
                 enemyAnimator.SetTrigger("onDead");
                 isDead = true;
@@ -73,7 +78,8 @@ public class EnemyController : MonoBehaviour
     {
         isInvulnerable = false;
         gameObject.SetActive(false);
-        gameManager.IncreaseScore(1);
+        //gameManager.IncreaseScore(1);
+        increaseScore.Invoke(1);
     }
 
     void FixedUpdate()
@@ -118,7 +124,7 @@ public class EnemyController : MonoBehaviour
         transform.localPosition = startPosition;
         originalX = transform.position.x;
 
-        gameConstants.enemyHealth = 3;
+        enemyHealth = 3;
         isDead = false;
         isInvulnerable = false;
         knockbackTimer = 0f;

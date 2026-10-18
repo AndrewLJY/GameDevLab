@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     [System.NonSerialized]
     public PlayerController playerController;
@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     public UnityEvent gameStart;
     public UnityEvent gameRestart;
-    public UnityEvent<int> scoreChange;
+    public UnityEvent scoreChange;
     public UnityEvent gameOver;
     public UnityEvent levelClear;
     public UnityEvent gamePaused;
@@ -40,9 +40,9 @@ public class GameManager : Singleton<GameManager>
 
         gameConstants.ResetToDefaults();
 
-        SetScore(gameScore.Value);
+        UpdateScoreUI();
 
-        gameRestart.Invoke();
+        //gameRestart.Invoke();
 
         ResetBgMusic();
 
@@ -56,18 +56,17 @@ public class GameManager : Singleton<GameManager>
     {
         gameScore.ApplyChange(increment);
 
-        SetScore(gameScore.Value);
+        UpdateScoreUI();
     }
 
-    public void SetScore(int score)
+    public void UpdateScoreUI()
     {
-        scoreChange.Invoke(score);
+        scoreChange.Invoke();
     }
 
     public void GameOver()
     {
         Time.timeScale = 0.0f;
-        gameOver.Invoke();
     }
 
     public void PauseGame()
@@ -122,6 +121,6 @@ public class GameManager : Singleton<GameManager>
     public void SceneSetup(Scene current, Scene next)
     {
         gameStart.Invoke();
-        SetScore(gameScore.Value);
+        UpdateScoreUI();
     }
 }

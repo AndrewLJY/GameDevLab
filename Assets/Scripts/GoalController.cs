@@ -36,7 +36,7 @@ public class GoalController : MonoBehaviour
         if (isPlayerInside && Input.GetKeyDown(KeyCode.F))
         {
             goalAudio.PlayOneShot(goalAudio.clip);
-            GameManager.instance.LevelClear();
+            //GameManager.instance.LevelClear();
         }
     }
 

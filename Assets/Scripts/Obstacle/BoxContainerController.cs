@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 
 public class BoxContainerController : MonoBehaviour
@@ -6,7 +7,9 @@ public class BoxContainerController : MonoBehaviour
 {
     private bool isQuestionBox = false;
     private Animator boxAnimator;
-    private RigidbodyType2D boxRigidbodyType2D;
+    //private RigidbodyType2D boxRigidbodyType2D;
+
+    public UnityEvent powerupReset;
 
 
     void Start()
@@ -15,7 +18,7 @@ public class BoxContainerController : MonoBehaviour
 
         boxAnimator = transform.GetComponent<Animator>();
     
-        boxRigidbodyType2D = gameObject.GetComponent<Rigidbody2D>().bodyType;
+        //boxRigidbodyType2D = gameObject.GetComponent<Rigidbody2D>().bodyType;
 
     }
 
@@ -32,7 +35,8 @@ public class BoxContainerController : MonoBehaviour
 
     public void GameRestart()
     {
-        Debug.Log(gameObject.name + " isQuestionBox: " + isQuestionBox);
         if (isQuestionBox) boxAnimator.SetBool("boxDisabled", false);
+        powerupReset.Invoke();
+
     }
 }

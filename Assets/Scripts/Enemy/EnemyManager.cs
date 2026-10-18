@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     void Awake()
     {
-        GameManager.instance.gameRestart.AddListener(GameRestart);
+        //GameManager.instance.gameRestart.AddListener(GameRestart);
     }
 
     void Start()

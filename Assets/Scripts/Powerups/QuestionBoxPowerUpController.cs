@@ -24,7 +24,7 @@ public class QuestionBoxPowerUpController : MonoBehaviour, IPowerupController
         if (other.gameObject.tag == "Player" && !powerup.hasSpawned)
         {
             // show disabled sprite
-            this.transform.parent.GetComponent<Animator>().SetTrigger("spawned");
+            //this.transform.parent.GetComponent<Animator>().SetTrigger("boxDisa");
             // spawn the powerup
             powerupAnimator.SetTrigger("spawned");
         }
