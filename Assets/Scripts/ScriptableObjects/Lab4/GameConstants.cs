@@ -13,7 +13,6 @@ public class GameConstants : ScriptableObject
     [SerializeField] private int defaultWeaponDmg = 1;
     [SerializeField] private int defaultWeaponKnockbackForce = 2;
 
-    [SerializeField] private int defaultEnemyHealth = 3;
     [SerializeField] private float defaultEnemyMoveSpeed = 0.5f;
     [SerializeField] private float defaultEnemyKnockbackForce = 0.1f;
 
@@ -36,7 +35,6 @@ public class GameConstants : ScriptableObject
 
     [Header("Enemy")]
     // Enemy
-    public int enemyHealth = 3;
     public float enemyMoveSpeed = 0.5f;
     public float enemyKnockbackForce = 0.1f;
 
@@ -50,6 +48,8 @@ public class GameConstants : ScriptableObject
     public AudioClip bgMusic;
     public AudioClip deathMusic;
 
+    public float flickerInterval = 1f;
+
     public void ResetToDefaults()
     {
         speed = defaultSpeed;
@@ -61,7 +61,6 @@ public class GameConstants : ScriptableObject
         weaponDmg = defaultWeaponDmg;
         weaponKnockbackForce = defaultWeaponKnockbackForce;
 
-        enemyHealth = defaultEnemyHealth;
         enemyMoveSpeed = defaultEnemyMoveSpeed;
         enemyKnockbackForce = defaultEnemyKnockbackForce;
 

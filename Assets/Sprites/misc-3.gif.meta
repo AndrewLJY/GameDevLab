@@ -4589,7 +4589,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_220
+      name: super_mario_idle
       rect:
         serializedVersion: 2
         x: 48
@@ -4633,7 +4633,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_222
+      name: super_mario_walk_
       rect:
         serializedVersion: 2
         x: 95
@@ -4655,7 +4655,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_223
+      name: super_mario_walk_3
       rect:
         serializedVersion: 2
         x: 115
@@ -4677,7 +4677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_224
+      name: super_mario_walk_1
       rect:
         serializedVersion: 2
         x: 140
@@ -4699,7 +4699,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_225
+      name: super_mario_jump
       rect:
         serializedVersion: 2
         x: 167
@@ -5205,7 +5205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_248
+      name: fire_mario_idle
       rect:
         serializedVersion: 2
         x: 119
@@ -5249,7 +5249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_250
+      name: fire_mario_walk_2
       rect:
         serializedVersion: 2
         x: 166
@@ -5271,7 +5271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_251
+      name: fire_mario_walk_3
       rect:
         serializedVersion: 2
         x: 186
@@ -5293,7 +5293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_252
+      name: fire_mario_walk_1
       rect:
         serializedVersion: 2
         x: 211
@@ -5315,7 +5315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_253
+      name: fire_mario_jump
       rect:
         serializedVersion: 2
         x: 238
@@ -8395,7 +8395,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_413
+      name: mario_fire_1
       rect:
         serializedVersion: 2
         x: 313
@@ -8417,7 +8417,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_414
+      name: mario_fire_2
       rect:
         serializedVersion: 2
         x: 324
@@ -8439,7 +8439,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_415
+      name: mario_fire_3
       rect:
         serializedVersion: 2
         x: 336
@@ -8461,7 +8461,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_416
+      name: mario_fire_4
       rect:
         serializedVersion: 2
         x: 348
@@ -9195,7 +9195,7 @@ TextureImporter:
         width: 41
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -9241,12 +9241,21 @@ TextureImporter:
       castle_right: 1729296779
       coin: 1185937349
       disabled_box: 1022145759
+      fire_mario_idle: -1993310212
+      fire_mario_jump: 325315377
+      fire_mario_walk_1: 1094294289
+      fire_mario_walk_2: -1892619442
+      fire_mario_walk_3: 675133739
       goomba_dead: 998783009
       goomba_left: -348658204
       goomba_right: -1166754851
       ground_brown: -1692987874
       hammer_up: -1068523615
       magic_mushroom: -666289827
+      mario_fire_1: -690822734
+      mario_fire_2: 1593040140
+      mario_fire_3: 2075392459
+      mario_fire_4: 1937787223
       misc-3_1: -1141243883
       misc-3_10: 1527029042
       misc-3_100: -246546002
@@ -9372,12 +9381,7 @@ TextureImporter:
       misc-3_218: -1052228427
       misc-3_219: -517573316
       misc-3_22: 937811159
-      misc-3_220: -1624931968
       misc-3_221: -372913295
-      misc-3_222: -1896643084
-      misc-3_223: -212507990
-      misc-3_224: 1404644128
-      misc-3_225: 1551871050
       misc-3_226: 297512526
       misc-3_227: -2110121788
       misc-3_228: 2139097281
@@ -9402,13 +9406,8 @@ TextureImporter:
       misc-3_245: -1678044191
       misc-3_246: 597216623
       misc-3_247: 225138520
-      misc-3_248: -1993310212
       misc-3_249: 304125763
       misc-3_25: 1183096824
-      misc-3_250: -1892619442
-      misc-3_251: 675133739
-      misc-3_252: 1094294289
-      misc-3_253: 325315377
       misc-3_254: 287728191
       misc-3_255: -30745559
       misc-3_256: 2080511962
@@ -9582,10 +9581,6 @@ TextureImporter:
       misc-3_410: 1512495346
       misc-3_411: -1470121233
       misc-3_412: -1308480186
-      misc-3_413: -690822734
-      misc-3_414: 1593040140
-      misc-3_415: 2075392459
-      misc-3_416: 1937787223
       misc-3_417: -1675243494
       misc-3_418: 1593367659
       misc-3_419: -646587682
@@ -9772,6 +9767,11 @@ TextureImporter:
       question_block_blink_2: -1234363973
       small_hill: -471315425
       star_flag: -1294900636
+      super_mario_idle: -1624931968
+      super_mario_jump: 1551871050
+      super_mario_walk_: -1896643084
+      super_mario_walk_1: 1404644128
+      super_mario_walk_3: -212507990
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,12 @@
+using UnityEngine;
+using static IPowerup;
+
+[CreateAssetMenu(menuName = "PluggableSM/Actions/ClearPowerup")]
+public class ClearPowerupAction : Action
+{
+    public override void Act(StateController controller)
+    {
+        MarioStateController m = (MarioStateController)controller;
+        m.currentPowerupType = PowerupType.Default;
+    }
+}

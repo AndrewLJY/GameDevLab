@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public UnityEvent gameOver;
 
+    public BoolVariable marioFaceRight;
 
     void Awake()
     {
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
         
         if (value == -1 && faceRightState)
         {
+            updateMarioShouldFaceRight(false);
             faceRightState = false;
             currentScale.x = value;
             transform.localScale = currentScale;
@@ -119,6 +121,7 @@ public class PlayerController : MonoBehaviour
 
         else if (value == 1 && !faceRightState)
         {
+            updateMarioShouldFaceRight(true);
             faceRightState = true;
             currentScale.x = value;
             transform.localScale = currentScale;
@@ -218,5 +221,11 @@ public class PlayerController : MonoBehaviour
     public void PauseGame()
     {
         gameManager.PauseGame();
+    }
+
+    private void updateMarioShouldFaceRight(bool value)
+    {
+        faceRightState = value;
+        marioFaceRight.SetValue(faceRightState);
     }
 }
