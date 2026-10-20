@@ -14,8 +14,10 @@ public class MagicMushroomPowerup : BasePowerup
     private AudioSource powerupAudioSource;
     private Vector3 initialPowerupPosition;
     private Vector3 initialPowerupColliderPosition;
+    private Vector3 powerUpAudioSourcePosition;
 
     public GameConstants gameConstants;
+    public AudioClip powerupApplySFX;
 
     public int scoreValue = 10;
 
@@ -35,12 +37,16 @@ public class MagicMushroomPowerup : BasePowerup
         base.Start(); // call base class Start()
         this.type = PowerupType.MagicMushroom;
         powerupAudioSource = GetComponent<AudioSource>();
+        powerUpAudioSourcePosition = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player") && spawned)
         {
+            AudioSource.PlayClipAtPoint(powerupApplySFX, powerUpAudioSourcePosition, 1.0f);
+
+            ApplyPowerup(col.gameObject.GetComponent<MonoBehaviour>());
 
             increaseScore.Invoke(scoreValue);
 
@@ -75,7 +81,14 @@ public class MagicMushroomPowerup : BasePowerup
     // interface implementation
     public override void ApplyPowerup(MonoBehaviour i)
     {
-        // TODO: do something with the object
+        base.ApplyPowerup(i);
+        // try
+        MarioStateController mario;
+        bool result = i.TryGetComponent<MarioStateController>(out mario);
+        if (result)
+        {
+            mario.SetPowerup(this.powerupType);
+        }
 
     }
 

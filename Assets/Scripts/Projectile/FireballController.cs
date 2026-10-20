@@ -6,7 +6,7 @@ using UnityEngine;
 public class FireballController : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float scaleSpeed = 1.0f;
+    [SerializeField] private float scaleSpeed = 2.0f;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class FireballController : MonoBehaviour
     private IEnumerator ScaleAndDestroyCoroutine()
     {
         // Wait for 2 seconds
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(1);
         // Gradually scale down the GameObject
         while (transform.localScale.x > 0.01f)
         {

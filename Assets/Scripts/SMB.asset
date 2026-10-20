@@ -15,11 +15,11 @@ MonoBehaviour:
   defaultSpeed: 1
   defaultMaxSpeed: 1
   defaultUpSpeed: 0.1
+  defaultFlickerInterval: 0.1
   defaultMarioPosition: {x: -0.947, y: -0.318, z: 0}
   defaultHealth: 3
   defaultWeaponDmg: 1
   defaultWeaponKnockbackForce: 2
-  defaultEnemyHealth: 3
   defaultEnemyMoveSpeed: 0.5
   defaultEnemyKnockbackForce: 0.1
   defaultPowerupScoreValue: 10
@@ -27,11 +27,11 @@ MonoBehaviour:
   speed: 1
   maxSpeed: 1
   upSpeed: 0.1
+  flickerInterval: 0.1
   marioStartingPosition: {x: -0.947, y: -0.318, z: 0}
   health: 3
   weaponDmg: 1
   weaponKnockbackForce: 2
-  enemyHealth: 3
   enemyMoveSpeed: 0.5
   enemyKnockbackForce: 0.1
   powerupScoreValue: 10

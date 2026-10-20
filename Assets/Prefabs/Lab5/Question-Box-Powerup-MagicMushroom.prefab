@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -666289827, guid: 82bc45c4496284f4c823d1b837f65ec4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -715,6 +715,7 @@ MonoBehaviour:
   type: 1
   spawned: 0
   gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
+  powerupApplySFX: {fileID: 8300000, guid: 26301d2e86e99420599e315297a825df, type: 3}
   scoreValue: 10
   increaseScore:
     m_PersistentCalls:

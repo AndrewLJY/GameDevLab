@@ -161,6 +161,16 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""cacca43b-f391-4db6-8eac-276a89b0f101"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -284,6 +294,17 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
                     ""action"": ""pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""817ac2f6-c2d7-47c7-9a34-386870c14817"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": "";SuperMarioBros"",
+                    ""action"": ""fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -316,6 +337,7 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
         m_gameplay_point = m_gameplay.FindAction("point", throwIfNotFound: true);
         m_gameplay_attack = m_gameplay.FindAction("attack", throwIfNotFound: true);
         m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
+        m_gameplay_fire = m_gameplay.FindAction("fire", throwIfNotFound: true);
     }
 
     ~@MarioActions()
@@ -403,6 +425,7 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_point;
     private readonly InputAction m_gameplay_attack;
     private readonly InputAction m_gameplay_pause;
+    private readonly InputAction m_gameplay_fire;
     /// <summary>
     /// Provides access to input actions defined in input action map "gameplay".
     /// </summary>
@@ -442,6 +465,10 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "gameplay/pause".
         /// </summary>
         public InputAction @pause => m_Wrapper.m_gameplay_pause;
+        /// <summary>
+        /// Provides access to the underlying input action "gameplay/fire".
+        /// </summary>
+        public InputAction @fire => m_Wrapper.m_gameplay_fire;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -489,6 +516,9 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
             @pause.started += instance.OnPause;
             @pause.performed += instance.OnPause;
             @pause.canceled += instance.OnPause;
+            @fire.started += instance.OnFire;
+            @fire.performed += instance.OnFire;
+            @fire.canceled += instance.OnFire;
         }
 
         /// <summary>
@@ -521,6 +551,9 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
             @pause.started -= instance.OnPause;
             @pause.performed -= instance.OnPause;
             @pause.canceled -= instance.OnPause;
+            @fire.started -= instance.OnFire;
+            @fire.performed -= instance.OnFire;
+            @fire.canceled -= instance.OnFire;
         }
 
         /// <summary>
@@ -623,5 +656,12 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFire(InputAction.CallbackContext context);
     }
 }

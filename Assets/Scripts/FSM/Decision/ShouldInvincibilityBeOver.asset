@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5396a500af4a449861d0f0f8cfc8b7, type: 3}
   m_Name: ShouldInvincibilityBeOver
   m_EditorClassIdentifier: Assembly-CSharp::CountdownDecision
-  buffDuration: 0
+  buffDuration: 2

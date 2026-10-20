@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static IPowerup;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpedState = false;
 
     private Rigidbody2D marioBody;
+    private SpriteRenderer spriteRenderer;
     //public AudioClip marioDeath;
     public AudioClip marioDmg;
     public AudioSource marioAudio;
@@ -32,14 +34,19 @@ public class PlayerController : MonoBehaviour
     GameManager gameManager;
 
     public UnityEvent gameOver;
+    public UnityEvent onDmg;
 
     public BoolVariable marioFaceRight;
+
+    public StateController marioStateController;
+    public State smallMarioState;
 
     void Awake()
     {
         //GameManager.instance.gameRestart.AddListener(GameRestart);
         marioBody = GetComponent<Rigidbody2D>();
         marioAnimator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -75,6 +82,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
             FlipMarioSprite(value);
             isMoving = true;
             marioAnimator.SetBool("isWalking", isMoving);
@@ -109,22 +117,24 @@ public class PlayerController : MonoBehaviour
     void FlipMarioSprite(int value)
     {
         Vector3 currentScale = transform.localScale;
-        
+
         if (value == -1 && faceRightState)
         {
-            updateMarioShouldFaceRight(false);
-            faceRightState = false;
-            currentScale.x = value;
-            transform.localScale = currentScale;
+            UpdateMarioShouldFaceRight(false);
+            //faceRightState = false;
+            spriteRenderer.flipX = true;
+            //currentScale.x = value;
+            //transform.localScale = currentScale;
 
         }
 
         else if (value == 1 && !faceRightState)
         {
-            updateMarioShouldFaceRight(true);
-            faceRightState = true;
-            currentScale.x = value;
-            transform.localScale = currentScale;
+            UpdateMarioShouldFaceRight(true);
+            //faceRightState = true;
+            spriteRenderer.flipX = false;
+            //currentScale.x = value;
+            //transform.localScale = currentScale;
         }
     }
 
@@ -141,7 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvulnerable)
         {
-            
+
             if (gameConstants.health > 0 && isMoving)
             {
                 Move(faceRightState == true ? 1 : -1);
@@ -163,27 +173,37 @@ public class PlayerController : MonoBehaviour
         {
             isInvulnerable = true;
 
-            marioAudio.PlayOneShot(marioDmg);
-            marioAnimator.SetTrigger("TakingDmg");
-            Vector2 heading = transform.position - other.transform.position;
-            Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
-            ApplyKnockback(knockbackDirection);
-
-            gameConstants.health -= 1;
-
-            playerHearts.transform.GetChild(gameConstants.health).GetComponent<HeartManager>().PlayerTakingDmg();
-
-            if (gameConstants.health == 1)
+            if (marioStateController.currentState == smallMarioState)
             {
-                //gameManager.SpeedUpBgMusic(1.3f);
+                marioAudio.PlayOneShot(marioDmg);
+                marioAnimator.SetTrigger("TakingDmg");
+                Vector2 heading = transform.position - other.transform.position;
+                Vector2 knockbackDirection = new Vector2(Mathf.Sign(heading.x), 0.3f).normalized;
+                ApplyKnockback(knockbackDirection);
+
+                gameConstants.health -= 1;
+
+                onDmg.Invoke();
+                //playerHearts.transform.GetChild(gameConstants.health).GetComponent<HeartManager>().PlayerTakingDmg();
+
+
+                if (gameConstants.health == 1)
+                {
+                    //gameManager.SpeedUpBgMusic(1.3f);
+                }
+
+                if (gameConstants.health <= 0)
+                {
+                    GetComponent<MarioStateController>().SetPowerup(PowerupType.Damage);
+                    //gameManager.SpeedUpBgMusic(1.0f);
+                    marioAudio.PlayOneShot(gameConstants.deathMusic);
+                    Time.timeScale = 0.0f;
+                    gameOver.Invoke();
+                }
             }
-
-            if (gameConstants.health <= 0)
+            else
             {
-                //gameManager.SpeedUpBgMusic(1.0f);
-                marioAudio.PlayOneShot(gameConstants.deathMusic);
-                Time.timeScale = 0.0f;
-                gameOver.Invoke();
+                GetComponent<MarioStateController>().SetPowerup(PowerupType.Damage);
             }
         }
 
@@ -223,7 +243,7 @@ public class PlayerController : MonoBehaviour
         gameManager.PauseGame();
     }
 
-    private void updateMarioShouldFaceRight(bool value)
+    private void UpdateMarioShouldFaceRight(bool value)
     {
         faceRightState = value;
         marioFaceRight.SetValue(faceRightState);

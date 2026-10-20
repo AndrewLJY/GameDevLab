@@ -75,6 +75,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "fire",
+                    "type": "Button",
+                    "id": "cacca43b-f391-4db6-8eac-276a89b0f101",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -196,6 +206,17 @@
                     "processors": "",
                     "groups": ";SuperMarioBros",
                     "action": "pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "817ac2f6-c2d7-47c7-9a34-386870c14817",
+                    "path": "<Keyboard>/z",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";SuperMarioBros",
+                    "action": "fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

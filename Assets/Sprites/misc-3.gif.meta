@@ -541,7 +541,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_22
+      name: fire_flower
       rect:
         serializedVersion: 2
         x: 52
@@ -9241,6 +9241,7 @@ TextureImporter:
       castle_right: 1729296779
       coin: 1185937349
       disabled_box: 1022145759
+      fire_flower: 937811159
       fire_mario_idle: -1993310212
       fire_mario_jump: 325315377
       fire_mario_walk_1: 1094294289
@@ -9380,7 +9381,6 @@ TextureImporter:
       misc-3_217: 414765032
       misc-3_218: -1052228427
       misc-3_219: -517573316
-      misc-3_22: 937811159
       misc-3_221: -372913295
       misc-3_226: 297512526
       misc-3_227: -2110121788

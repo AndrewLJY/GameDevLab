@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
+
+    public GameConstants gameConstants;
+
     void Awake()
     {
         //GameManager.instance.gameRestart.AddListener(ResetPlayerHearts);
+    }
+
+    public void PlayerTakingDmg()
+    {
+        transform.GetChild(gameConstants.health).GetComponent<HeartManager>().PlayerTakingDmg();
     }
 
     public void ResetPlayerHearts()
