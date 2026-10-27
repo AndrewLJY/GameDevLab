@@ -8,6 +8,7 @@ public class GameConstants : ScriptableObject
     [SerializeField] private float defaultMaxSpeed = 1f;
     [SerializeField] private float defaultUpSpeed = 0.1f;
     [SerializeField] private float defaultFlickerInterval = 0.1f;
+    [SerializeField] private float defaultStarmanInterval = 0.1f;
     [SerializeField] private Vector3 defaultMarioPosition = new Vector3(-0.947f, -0.318f, 0);
     [SerializeField] private int defaultHealth = 3;
 
@@ -27,6 +28,7 @@ public class GameConstants : ScriptableObject
     public float maxSpeed = 1f;
     public float upSpeed = 0.1f;
     public float flickerInterval = 0.1f;
+    public float starmanInterval = 0.1f;
     public Vector3 marioStartingPosition = new Vector3(-0.947f, -0.318f, 0);
     public int health = 3;
 
@@ -56,6 +58,7 @@ public class GameConstants : ScriptableObject
         maxSpeed = defaultMaxSpeed;
         upSpeed = defaultUpSpeed;
         flickerInterval = defaultFlickerInterval;
+        starmanInterval = defaultStarmanInterval;
         marioStartingPosition = defaultMarioPosition;
         health = defaultHealth;
 

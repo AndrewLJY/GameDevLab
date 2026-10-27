@@ -7,10 +7,13 @@ using UnityEngine;
 public class StarmanMarioAction : Action
 {
     public AudioClip invincibilityStart;
+    public AudioClip starmanMusic;
+
     public override void Act(StateController controller)
     {
         BuffStateController m = (BuffStateController)controller;
         m.gameObject.GetComponent<AudioSource>().PlayOneShot(invincibilityStart);
+        m.PlayStarmanMusic(starmanMusic);
         m.SetRendererToFlicker();
     }
 }

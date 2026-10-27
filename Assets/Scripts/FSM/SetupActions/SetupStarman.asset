@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SetupStarman
   m_EditorClassIdentifier: Assembly-CSharp::StarmanMarioAction
   invincibilityStart: {fileID: 8300000, guid: 26301d2e86e99420599e315297a825df, type: 3}
+  starmanMusic: {fileID: 8300000, guid: fe80c79237cc34e99babbc6d54016d93, type: 3}

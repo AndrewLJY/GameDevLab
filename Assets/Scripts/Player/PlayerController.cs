@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
     public BoolVariable marioFaceRight;
 
     public StateController marioStateController;
+    public StateController buffStateController;
     public State smallMarioState;
+    public State invincibleSmallMarioState;
+    public State starmanState;
 
     void Awake()
     {
@@ -169,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(Collider2D other)
     {
-        if (!isInvulnerable)
+        if (!isInvulnerable && marioStateController.currentState != invincibleSmallMarioState && buffStateController.currentState != starmanState)
         {
             isInvulnerable = true;
 

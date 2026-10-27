@@ -13,6 +13,8 @@ public class BuffStateController : StateController
 
     public GameConstants gameConstants;
 
+    public AudioSource musicSource; // drag the child object's AudioSource here
+
     public override void Start()
     {
         base.Start();
@@ -42,21 +44,31 @@ public class BuffStateController : StateController
     private IEnumerator BlinkSpriteRenderer()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         while (string.Equals(currentState.name, "StarmanMario", StringComparison.OrdinalIgnoreCase))
         {
             spriteRenderer.color = spriteRenderer.color == Color.white ? Color.black : Color.white;
 
-            spriteRenderer.color = Color.white;
-
             // Wait for the specified blink interval
-            yield return new WaitForSeconds(gameConstants.flickerInterval);
+            yield return new WaitForSeconds(gameConstants.starmanInterval);
         }
+        
+        spriteRenderer.color = Color.white;
 
     }
 
-    public void Fire()
+    public void PlayStarmanMusic(AudioClip clip)
     {
-        this.currentState.DoEventTriggeredActions(this, ActionType.Attack);
+        if (musicSource.isPlaying) return;
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
     }
+
+    public void StopStarmanMusic()
+    {
+        musicSource.Stop();
+    }
+
 
 }
