@@ -2,6 +2,7 @@ using System;
 using Unity.AppUI.UI;
 using UnityEngine;
 using static IPowerup;
+
 [CreateAssetMenu(menuName = "PluggableSM/Decisions/Transform")]
 public class TransformDecision : Decision
 {

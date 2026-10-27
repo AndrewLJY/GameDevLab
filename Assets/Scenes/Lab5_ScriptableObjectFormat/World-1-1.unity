@@ -4246,6 +4246,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7247664289127760299, guid: fef2e362f3ec53548b10580aabe6a750, type: 3}
   m_PrefabInstance: {fileID: 1568016435}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1156209745
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1479736778}
+    m_Modifications:
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.4075122
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1224
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459139365739114956, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+      propertyPath: m_Name
+      value: Question-Box-Powerup-Star
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+--- !u!4 &1156209746 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7421626705870480143, guid: 6bf40b0de285ad24eb730376d57aec12, type: 3}
+  m_PrefabInstance: {fileID: 1156209745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1163536754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4265,6 +4327,7 @@ GameObject:
   - component: {fileID: 1163536764}
   - component: {fileID: 1163536767}
   - component: {fileID: 1163536765}
+  - component: {fileID: 1163536768}
   m_Layer: 6
   m_Name: Mario
   m_TagString: Player
@@ -4910,6 +4973,28 @@ MonoBehaviour:
   isActive: 1
   currentPowerupType: -1
   shouldBeNextState: -1
+  gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
+--- !u!114 &1163536768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163536754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9977f92a36f7b7a4f80551561b7144e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuffStateController
+  startState: {fileID: 11400000, guid: 5961c61bb91e2be4ba521fc900a66d7c, type: 2}
+  previousState: {fileID: 0}
+  currentState: {fileID: 0}
+  remainState: {fileID: 11400000, guid: 0d3528c7f1551c3498d33b1af2d64a22, type: 2}
+  transitionStateChanged: 0
+  stateTimeElapsed: 0
+  isActive: 1
+  currentPowerupType: -1
+  shouldBeNextState: 0
   gameConstants: {fileID: 11400000, guid: 433514620863a0047bcadce63545ed9a, type: 2}
 --- !u!1 &1165932441
 GameObject:
@@ -5983,6 +6068,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1156209746}
   - {fileID: 2049922964}
   - {fileID: 1552462032}
   - {fileID: 1199637165868708604}

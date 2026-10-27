@@ -1113,7 +1113,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: misc-3_48
+      name: star
       rect:
         serializedVersion: 2
         x: 53
@@ -9648,7 +9648,6 @@ TextureImporter:
       misc-3_477: -239252075
       misc-3_478: 2069293824
       misc-3_479: 959294775
-      misc-3_48: -363479301
       misc-3_480: 134322125
       misc-3_481: 1063393071
       misc-3_482: -851273049
@@ -9766,6 +9765,7 @@ TextureImporter:
       question_block_blink_1: 455635952
       question_block_blink_2: -1234363973
       small_hill: -471315425
+      star: -363479301
       star_flag: -1294900636
       super_mario_idle: -1624931968
       super_mario_jump: 1551871050
