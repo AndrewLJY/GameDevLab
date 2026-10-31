@@ -29,12 +29,6 @@ public class HUDManager : MonoBehaviour
 
     void Awake()
     {
-        //GameManager.instance.gameStart.AddListener(GameStart);
-        //GameManager.instance.gameOver.AddListener(GameOver);
-        //GameManager.instance.gameRestart.AddListener(GameStart);
-        //GameManager.instance.scoreChange.AddListener(SetScore);
-        //GameManager.instance.levelClear.AddListener(LevelClear);
-        //GameManager.instance.gamePaused.AddListener(PauseGame);
     }
 
     void Start()

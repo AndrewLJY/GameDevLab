@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
     public GameObject playerHearts;
     public MarioActions marioActions;
 
-    GameManager gameManager;
-
     public UnityEvent gameOver;
     public UnityEvent onDmg;
+    public UnityEvent<float> lowHealth;
+    public UnityEvent pauseGame;
 
     public BoolVariable marioFaceRight;
 
@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        //GameManager.instance.gameRestart.AddListener(GameRestart);
         marioBody = GetComponent<Rigidbody2D>();
         marioAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -54,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //gameManager = GameManager.instance;
 
         SetStartingPosition();
 
@@ -187,18 +185,16 @@ public class PlayerController : MonoBehaviour
                 gameConstants.health -= 1;
 
                 onDmg.Invoke();
-                //playerHearts.transform.GetChild(gameConstants.health).GetComponent<HeartManager>().PlayerTakingDmg();
-
 
                 if (gameConstants.health == 1)
                 {
-                    //gameManager.SpeedUpBgMusic(1.3f);
+                    lowHealth.Invoke(1.3f);
                 }
 
                 if (gameConstants.health <= 0)
                 {
                     GetComponent<MarioStateController>().SetPowerup(PowerupType.Damage);
-                    //gameManager.SpeedUpBgMusic(1.0f);
+                    lowHealth.Invoke(1.0f);
                     marioAudio.PlayOneShot(gameConstants.deathMusic);
                     Time.timeScale = 0.0f;
                     gameOver.Invoke();
@@ -243,7 +239,7 @@ public class PlayerController : MonoBehaviour
 
     public void PauseGame()
     {
-        gameManager.PauseGame();
+        pauseGame.Invoke();
     }
 
     private void UpdateMarioShouldFaceRight(bool value)

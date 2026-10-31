@@ -30,19 +30,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SceneManager.activeSceneChanged += SceneSetup;
-        gameScore.ResetValue();
+        //gameScore.ResetValue();
         GameRestart();
     }
 
     public void GameRestart()
     {
-        if(SceneManager.GetActiveScene().name == "World-1-1") gameScore.ResetValue();
+        if(SceneManager.GetActiveScene().name == "Lab5_World-1-1") gameScore.ResetValue();
 
         gameConstants.ResetToDefaults();
 
         UpdateScoreUI();
-
-        //gameRestart.Invoke();
 
         ResetBgMusic();
 
@@ -71,8 +69,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        gamePaused.Invoke();
-
         if (gameAudio.isPlaying) gameAudio.Pause();
         else gameAudio.Play();
     }

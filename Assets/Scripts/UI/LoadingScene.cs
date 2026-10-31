@@ -19,7 +19,7 @@ public class LoadingScene: MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
 
-        SceneManager.LoadSceneAsync("World-1-1", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("Lab5_World-1-1", LoadSceneMode.Single);
     }
 
     public void ReturnToMainMenu()
